@@ -1,0 +1,1627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Project Plan &middot; A Guide to Project Management for Irish SMEs &amp; Charities</title>
+<meta name="description" content="A free, accessible project management guide for small businesses and charities in Ireland.">
+<style>
+/* ==========================================================================
+   THE PROJECT PLAN — vibrant modern design system, v2
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root{
+  --ink:#17102B;
+  --ink-soft:#5C5570;
+  --bg:#FCFAFF;
+  --bg-alt:#F4EEFF;
+  --card:#FFFFFF;
+  --purple:#7C2AF5;
+  --purple-dark:#5B15C4;
+  --purple-light:#EDE1FF;
+  --pink:#FF4FA0;
+  --pink-soft:#FFE1EC;
+  --success:#16A34A;
+  --success-soft:#E7F8EE;
+  --rule:#EBE4F9;
+  --gradient: linear-gradient(135deg, var(--purple) 0%, var(--pink) 100%);
+  --gradient-soft: linear-gradient(135deg, var(--purple-light) 0%, var(--pink-soft) 100%);
+  --shadow-sm: 0 2px 10px rgba(92,15,196,0.07);
+  --shadow-md: 0 12px 30px rgba(92,15,196,0.12);
+  --shadow-lg: 0 24px 60px rgba(92,15,196,0.18);
+  --radius: 18px;
+  --radius-sm: 12px;
+  --max: 76rem;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+  --focus: 3px solid var(--purple);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Atkinson Hyperlegible', 'Segoe UI', Arial, sans-serif;
+  font-size:1.05rem;
+  line-height:1.65;
+  overflow-x:hidden;
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+}
+
+img{ max-width:100%; display:block; }
+a{ color:var(--purple-dark); text-decoration-thickness:2px; text-underline-offset:3px; }
+a:hover{ color:var(--pink); }
+:focus-visible{ outline:var(--focus); outline-offset:3px; border-radius:4px; }
+
+h1,h2,h3,h4{
+  font-family:'Sora', 'Segoe UI', sans-serif;
+  color:var(--ink);
+  line-height:1.12;
+  margin:0 0 0.6em;
+  letter-spacing:-0.015em;
+}
+h1{ font-size:clamp(2.3rem, 5vw, 3.8rem); font-weight:800; }
+h2{ font-size:clamp(1.6rem, 2.8vw, 2.3rem); font-weight:700; }
+h3{ font-size:1.22rem; font-weight:700; }
+p{ margin:0 0 1.1em; max-width:66ch; }
+ul,ol{ padding-left:1.3em; margin:0 0 1.1em; }
+li{ margin-bottom:0.4em; }
+
+.mono{ font-family:'IBM Plex Mono', monospace; }
+.eyebrow{
+  font-family:'IBM Plex Mono', monospace;
+  font-size:0.78rem;
+  font-weight:600;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--purple-dark);
+  display:inline-flex;
+  align-items:center;
+  gap:0.5em;
+  padding:0.35em 0.9em;
+  background:var(--purple-light);
+  border-radius:100px;
+  margin-bottom:1rem;
+}
+.eyebrow::before{ content:"✦"; color:var(--pink); }
+
+.wrap{ max-width:var(--max); margin:0 auto; padding-inline:var(--gutter); }
+
+.skip-link{
+  position:absolute; left:-999px; top:auto;
+  background:var(--ink); color:#fff; padding:0.8em 1.2em;
+  z-index:400; font-family:'IBM Plex Mono',monospace; font-size:0.9rem; border-radius:8px;
+}
+.skip-link:focus{ left:1em; top:4em; }
+
+.scroll-progress{
+  position:fixed; top:0; left:0; height:4px; width:0%;
+  background:var(--gradient); z-index:500;
+  transition:width 0.08s linear;
+}
+
+/* Content is visible by default no matter what. The 'reveal-armed' class is
+   added by JS only after it has confirmed it can also add 'in-view' back in —
+   so if the script fails or is blocked, nothing ever gets hidden in the first place. */
+.reveal.reveal-armed{ opacity:0; transform:translateY(28px); transition:opacity .7s cubic-bezier(.16,.8,.3,1), transform .7s cubic-bezier(.16,.8,.3,1); }
+.reveal.reveal-armed.in-view{ opacity:1; transform:translateY(0); }
+@media (prefers-reduced-motion: reduce){ .reveal.reveal-armed{ opacity:1 !important; transform:none !important; } }
+
+.blob{
+  position:absolute; border-radius:50%; filter:blur(60px); opacity:0.55; pointer-events:none; z-index:0;
+  will-change:transform;
+}
+.blob-1{ width:420px; height:420px; background:var(--purple); top:-140px; right:-100px; }
+.blob-2{ width:320px; height:320px; background:var(--pink); bottom:-120px; left:-80px; }
+.blob-3{ width:220px; height:220px; background:var(--purple); top:40%; left:38%; opacity:0.28; }
+
+.site-header{
+  position:sticky; top:0; z-index:200;
+  background:rgba(252,250,255,0.82);
+  backdrop-filter: blur(10px);
+  border-bottom:1px solid transparent;
+  transition:box-shadow .25s ease, border-color .25s ease;
+}
+.site-header.scrolled{ box-shadow:var(--shadow-sm); border-bottom-color:var(--rule); }
+.site-header .wrap{
+  display:flex; align-items:center; justify-content:space-between;
+  padding-block:0.85rem;
+  gap:1rem;
+}
+.brand{
+  display:flex; align-items:center; gap:0.7rem;
+  font-family:'Sora', sans-serif; font-weight:800;
+  font-size:1.05rem; color:var(--ink); text-decoration:none;
+}
+.brand .mark{
+  width:36px; height:36px; border-radius:11px; background:var(--gradient);
+  display:grid; place-items:center; font-family:'Sora',sans-serif; font-weight:800;
+  font-size:0.8rem; color:#fff; flex:none; box-shadow:var(--shadow-sm);
+}
+.brand small{ display:block; font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:0.65rem; letter-spacing:0.06em; color:var(--ink-soft); text-transform:uppercase;}
+
+.nav-toggle{
+  display:none;
+  font-family:'IBM Plex Mono',monospace;
+  background:#fff; border:1.5px solid var(--rule); border-radius:100px;
+  padding:0.5em 0.9em; cursor:pointer; font-size:0.85rem;
+}
+.main-nav{ display:flex; flex-wrap:wrap; gap:0.15rem; align-items:center; }
+.main-nav a{
+  color:var(--ink-soft); text-decoration:none; font-size:0.88rem; font-weight:600;
+  padding:0.5em 0.85em; border-radius:100px; transition:background .15s,color .15s;
+}
+.main-nav a:hover{ color:var(--purple-dark); background:var(--purple-light); }
+.main-nav a[aria-current="page"], .main-nav a.active{ color:#fff; background:var(--gradient); }
+
+@media (max-width: 980px){
+  .nav-toggle{ display:inline-block; }
+  .main-nav{
+    display:none; flex-direction:column; align-items:flex-start;
+    position:absolute; left:0; right:0; top:100%;
+    background:#fff; border-bottom:1px solid var(--rule);
+    padding:1rem var(--gutter) 1.4rem; box-shadow:var(--shadow-md);
+  }
+  .main-nav a{ width:100%; }
+  .main-nav.open{ display:flex; }
+}
+
+.titleblock-hero{
+  position:relative; overflow:hidden;
+  padding-block: clamp(3rem, 7vw, 5.5rem) clamp(2.5rem, 6vw, 4rem);
+  isolation:isolate;
+}
+.titleblock-hero .inner{ position:relative; z-index:1; display:grid; grid-template-columns: 1.5fr 1fr; gap:2.5rem; align-items:center; }
+@media (max-width:800px){ .titleblock-hero .inner{ grid-template-columns:1fr; } }
+.titleblock-hero h1{
+  background:var(--gradient); -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+
+.titleblock{
+  position:relative;
+  background:#fff; border-radius:var(--radius);
+  box-shadow:var(--shadow-lg);
+  padding:1.6rem;
+  font-family:'IBM Plex Mono', monospace;
+  font-size:0.82rem;
+  transform:rotate(-1.2deg);
+}
+.titleblock .row{ display:flex; padding-block:0.6em; border-top:1px dashed var(--rule); }
+.titleblock .row:first-child{ border-top:none; padding-top:0; }
+.titleblock .cell{ flex:1; }
+.titleblock .label{ display:block; color:var(--ink-soft); font-size:0.66rem; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.3em; }
+.titleblock .value{ color:var(--purple-dark); font-weight:700; }
+
+.btn{
+  display:inline-flex; align-items:center; gap:0.5em;
+  font-family:'Sora', sans-serif; font-weight:700; font-size:0.92rem;
+  text-decoration:none;
+  padding:0.85em 1.5em; border-radius:100px;
+  border:2px solid var(--ink); color:var(--ink); background:transparent;
+  cursor:pointer; transition:transform .15s ease, box-shadow .15s ease;
+}
+.btn:hover{ transform:translateY(-2px); box-shadow:var(--shadow-sm); color:var(--ink); }
+.btn-primary{ background:var(--gradient); border-color:transparent; color:#fff; box-shadow:var(--shadow-md); }
+.btn-primary:hover{ box-shadow:var(--shadow-lg); color:#fff; }
+.btn-row{ display:flex; flex-wrap:wrap; gap:0.75rem; margin-top:1.4rem; }
+
+.dim-rule{
+  display:flex; align-items:center; gap:0.8rem;
+  margin:3rem 0 2rem; color:var(--purple);
+  font-family:'IBM Plex Mono',monospace; font-size:0.72rem; letter-spacing:0.1em; text-transform:uppercase;
+}
+.dim-rule::before,.dim-rule::after{ content:""; flex:1; height:2px; background:var(--gradient-soft); border-radius:2px; }
+.dim-rule .tick{ display:none; }
+
+.sheet-index{ font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--purple-dark); }
+
+.grid{ display:grid; gap:1.5rem; }
+.grid-3{ grid-template-columns:repeat(3,1fr); }
+.grid-2{ grid-template-columns:repeat(2,1fr); }
+@media (max-width:820px){ .grid-3,.grid-2{ grid-template-columns:1fr; } }
+
+.card{
+  background:var(--card);
+  border:1px solid var(--rule);
+  border-radius:var(--radius);
+  padding:1.7rem 1.8rem;
+  box-shadow:var(--shadow-sm);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.card:hover{ transform:translateY(-4px); box-shadow:var(--shadow-md); }
+.card h3{ margin-bottom:0.5em; }
+.card .tag{
+  display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:0.68rem; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.06em; color:var(--purple-dark);
+  background:var(--purple-light); border-radius:100px; padding:0.3em 0.8em; margin-bottom:0.9em;
+}
+
+.topic-card{
+  display:block; text-decoration:none; color:inherit;
+  background:var(--card); border:1px solid var(--rule); border-radius:var(--radius);
+  padding:1.7rem; transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  position:relative; overflow:hidden;
+}
+.topic-card::before{
+  content:""; position:absolute; inset:0 0 auto 0; height:5px; background:var(--gradient);
+  transform:scaleX(0); transform-origin:left; transition:transform .3s ease;
+}
+.topic-card:hover{ transform:translateY(-6px); box-shadow:var(--shadow-md); border-color:transparent; }
+.topic-card:hover::before{ transform:scaleX(1); }
+.topic-card .num{
+  font-family:'IBM Plex Mono',monospace; color:var(--pink); font-size:0.72rem; font-weight:700;
+  background:var(--pink-soft); border-radius:100px; padding:0.3em 0.75em; display:inline-block; margin-bottom:0.7em;
+}
+.topic-card h3{ color:var(--ink); margin:0.2em 0 0.4em; }
+.topic-card p{ font-size:0.92rem; color:var(--ink-soft); margin:0; }
+
+.layers{ margin-top:1.2rem; display:flex; flex-direction:column; gap:0.8rem; }
+.layer{
+  border:1px solid var(--rule); border-radius:var(--radius-sm); background:#fff; overflow:hidden;
+  transition:box-shadow .2s ease;
+}
+.layer[open]{ box-shadow:var(--shadow-sm); }
+.layer summary{
+  cursor:pointer; list-style:none;
+  display:flex; align-items:center; gap:0.9rem;
+  padding:1.1rem 1.3rem;
+  font-family:'Sora', sans-serif; font-weight:700; color:var(--ink);
+}
+.layer summary::-webkit-details-marker{ display:none; }
+.layer summary .n{
+  font-family:'IBM Plex Mono',monospace; font-size:0.72rem; font-weight:700; color:#fff;
+  background:var(--gradient); border-radius:50%; width:1.9em; height:1.9em;
+  display:grid; place-items:center; flex:none;
+}
+.layer summary .plus{ margin-left:auto; font-family:'IBM Plex Mono',monospace; color:var(--purple); font-size:1.1rem; }
+.layer[open] summary .plus::before{ content:"–"; }
+.layer:not([open]) summary .plus::before{ content:"+"; }
+.layer-body{ padding:0 1.3rem 1.5rem 3rem; }
+.layer-body p:last-child{ margin-bottom:0; }
+.script-box{
+  background:var(--bg-alt); border:1px solid var(--rule); border-radius:var(--radius-sm);
+  padding:1.1rem 1.3rem; font-size:0.95rem; white-space:pre-line;
+}
+
+table{ width:100%; border-collapse:separate; border-spacing:0; margin:0 0 1rem; font-size:0.92rem; border:1px solid var(--rule); border-radius:var(--radius-sm); overflow:hidden; }
+caption{ text-align:left; font-family:'IBM Plex Mono',monospace; font-size:0.75rem; color:var(--ink-soft); margin-bottom:0.6em; }
+th,td{ border-bottom:1px solid var(--rule); padding:0.65em 0.85em; text-align:left; vertical-align:top; }
+th{ background:var(--purple-light); font-family:'Sora',sans-serif; font-size:0.85rem; color:var(--purple-dark); }
+tr:last-child td{ border-bottom:none; }
+
+.example{
+  border:1px solid var(--success); border-left-width:5px;
+  background:var(--success-soft);
+  padding:1.1rem 1.4rem;
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+}
+.example .eyebrow{ color:var(--success); background:#fff; }
+.example .eyebrow::before{ content:"☘"; color:var(--success); }
+
+.callout{
+  border:1px solid var(--pink); border-left-width:5px;
+  background:var(--pink-soft);
+  padding:1.1rem 1.4rem;
+  border-radius:0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.diagram-block{
+  border:1.5px dashed var(--purple); border-radius:var(--radius-sm);
+  padding:1.3rem 1.5rem; background:var(--purple-light);
+}
+
+.site-footer{
+  position:relative; margin-top:5rem;
+  padding-block:3rem 3.5rem;
+  background:var(--ink); color:#fff;
+  border-radius:32px 32px 0 0;
+}
+.site-footer a{ color:#fff; opacity:0.85; }
+.site-footer a:hover{ opacity:1; color:var(--pink); }
+.site-footer .wrap{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:2rem; }
+@media (max-width:800px){ .site-footer .wrap{ grid-template-columns:1fr 1fr; } }
+.site-footer h4{ color:#fff; font-size:0.82rem; text-transform:uppercase; letter-spacing:0.08em; font-family:'IBM Plex Mono',monospace; margin-bottom:0.9em; opacity:0.7; }
+.site-footer ul{ list-style:none; padding:0; margin:0; }
+.site-footer li{ margin-bottom:0.55em; font-size:0.9rem; }
+.site-footer .stamp{ font-family:'IBM Plex Mono',monospace; font-size:0.72rem; opacity:0.5; margin-top:2.5rem; }
+
+.section{ padding-block:3.5rem; position:relative; }
+.section-tight{ padding-block:2rem; position:relative; }
+.center{ text-align:center; }
+.lede{ font-size:1.2rem; color:var(--ink-soft); max-width:60ch; }
+.badge-row{ display:flex; flex-wrap:wrap; gap:0.5rem; margin:1rem 0; }
+.badge{
+  font-family:'IBM Plex Mono',monospace; font-size:0.72rem; text-transform:uppercase; letter-spacing:0.05em;
+  background:var(--purple-light); color:var(--purple-dark); border-radius:100px; padding:0.35em 0.9em;
+}
+.checklist{ list-style:none; padding:0; }
+.checklist li{ padding-left:1.9em; position:relative; }
+.checklist li::before{ content:"✓"; position:absolute; left:0; top:0; color:#fff; background:var(--gradient); width:1.3em; height:1.3em; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.7em; font-weight:700; }
+.swatch-row{ display:flex; flex-wrap:wrap; gap:1.2rem; }
+.swatch{ width:140px; }
+.swatch .chip{ height:74px; border-radius:var(--radius-sm); box-shadow:var(--shadow-sm); margin-bottom:0.6em; }
+.swatch .name{ font-weight:700; font-size:0.85rem; }
+.swatch .hex{ font-family:'IBM Plex Mono',monospace; font-size:0.75rem; color:var(--ink-soft); }
+.toc{ columns:2; gap:2rem; }
+@media (max-width:700px){ .toc{ columns:1; } }
+.toc a{ display:block; padding:0.4em 0.6em; font-size:0.92rem; border-radius:8px; }
+.toc a:hover{ background:var(--purple-light); }
+
+input[type="checkbox"]{ accent-color:var(--purple); width:1.1em; height:1.1em; margin-right:0.5em; vertical-align:middle; }
+input[type="range"]{ accent-color:var(--purple); }
+
+</style>
+</head>
+<body>
+<div class="scroll-progress" aria-hidden="true"></div>
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <span class="mark" aria-hidden="true">PM</span>
+      <span>The Project Plan<small>A guide for Irish SMEs &amp; charities</small></span>
+    </a>
+    <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation menu">Menu ☰</button>
+    <nav class="main-nav" aria-label="Primary"><a href="#top">Home</a><a href="#foundations">Foundations</a><a href="#teams-leadership">Teams & Leadership</a><a href="#risk-management">Risk</a><a href="#ethics-governance">Ethics & Governance</a><a href="#strategy-planning">Strategy & Planning</a><a href="#stakeholders">Stakeholders</a><a href="#methodologies">Methodologies</a><a href="#ai-in-pm">AI in PM</a><a href="#resource-library">Resource Library</a><a href="#interactive-tools">Interactive Tools</a><a href="#referencing">References</a><a href="#standards">Guide Standards</a></nav>
+  </div>
+</header>
+<main id="main">
+<div id="top">
+<section class="titleblock-hero">
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="blob blob-3" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <div class="reveal in-view">
+      <p class="eyebrow">Homepage</p>
+      <h1>Project management, made usable for small teams doing big things</h1>
+      <p class="lede">A free, plain-English guide to running projects well &mdash; built for small businesses and charities in Ireland who don&rsquo;t have a PMO, a project office, or hours to spare. Read it, watch it, or listen to it.</p>
+    </div>
+    <div class="reveal in-view">
+    <div class="titleblock">
+  <div class="row">
+    <div class="cell"><span class="label">Sheet</span><span class="value">01 / 13</span></div>
+    <div class="cell"><span class="label">Region</span><span class="value">Ireland</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Topic</span><span class="value">Homepage</span></div>
+    <div class="cell"><span class="label">Level</span><span class="value">Start here</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Est. time</span><span class="value">3 min read</span></div>
+    <div class="cell"><span class="label">Format</span><span class="value">Text / audio / video</span></div>
+  </div>
+</div>
+    </div>
+  </div>
+</section>
+    <section class="section reveal">
+      <div class="wrap">
+        <div class="grid grid-2" style="align-items:start;">
+          <div>
+            <p class="eyebrow">Purpose of this guide</p>
+            <h2>Why this exists</h2>
+            <p>Most project management advice is written for large corporates with dedicated PMOs, enterprise software and full-time project managers. Irish small businesses and charities rarely have any of that &mdash; instead they have a manager wearing five hats, a handful of staff or volunteers, a tight budget, and a funder or board asking for results.</p>
+            <p>This guide translates MSc-level project management theory &mdash; drawn from bodies of knowledge such as PMI&rsquo;s <em>PMBOK&reg; Guide</em> (PMI, 2021) and the APM <em>Body of Knowledge</em> (APM, 2019) &mdash; into short, practical, Irish-contextualised sections you can act on this week.</p>
+          </div>
+          <div>
+            <p class="eyebrow">Who it is for</p>
+            <h2>Built for two audiences</h2>
+            <ul>
+              <li><strong>Small and micro businesses</strong> in Ireland running client projects, product launches, or internal change with limited resources.</li>
+              <li><strong>Charities and community organisations</strong> delivering funded programmes, often with volunteer boards, restricted grants, and Charities Regulator obligations.</li>
+            </ul>
+            <p>If you are managing a project without a project management qualification &mdash; this guide is for you.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section reveal" style="background:var(--bg-alt);">
+      <div class="wrap">
+        <p class="eyebrow">How to use this guide</p>
+        <h2>Read a page, borrow a template, get moving</h2>
+        <div class="grid grid-3">
+          <div class="card"><span class="tag">01</span><h3>Start with Foundations</h3><p>If project management is new to your organisation, read the Foundations section first. Everything else builds on it.</p></div>
+          <div class="card"><span class="tag">02</span><h3>Jump to your problem</h3><p>Already running projects? Go straight to the topic you need &mdash; Risk, Stakeholders, or Methodologies &mdash; and lift the template.</p></div>
+          <div class="card"><span class="tag">03</span><h3>Use the tools</h3><p>Try the Project Readiness Checklist and short quiz in Interactive Tools before you commit resources to a new project.</p></div>
+        </div>
+      </div>
+    </section>
+    <section class="section reveal">
+      <div class="wrap">
+        <p class="eyebrow">The guide, sheet by sheet</p>
+        <h2>Twelve sections, one project</h2>
+        <p class="lede">Each section includes a short read, a ready-to-use template, a 1&ndash;2 minute video script, a 30&ndash;60 second audio script, a diagram you can recreate, and an Irish example.</p>
+        <div class="grid grid-3" style="margin-top:1.6rem;">
+          <a class="topic-card" href="#foundations">
+  <span class="num">Sheet 02</span>
+  <h3>Foundations of PM</h3>
+  <p>What project management is, and how PMBOK, PRINCE2, Agile and Lean differ &mdash; with the Irish funding and regulatory context.</p>
+</a>
+          <a class="topic-card" href="#teams-leadership">
+  <span class="num">Sheet 03</span>
+  <h3>Teams & Leadership</h3>
+  <p>Tuckman&rsquo;s stages, Belbin roles, leadership styles and conflict management for small, often part-time teams.</p>
+</a>
+          <a class="topic-card" href="#risk-management">
+  <span class="num">Sheet 04</span>
+  <h3>Risk Management</h3>
+  <p>Identify, assess and mitigate risk with a ready-to-use risk register, focused on funding, volunteer and compliance risk.</p>
+</a>
+          <a class="topic-card" href="#ethics-governance">
+  <span class="num">Sheet 05</span>
+  <h3>Ethics, Sustainability & Governance</h3>
+  <p>The PMI Code of Ethics, the UN SDGs, and Irish charity governance requirements explained simply.</p>
+</a>
+          <a class="topic-card" href="#strategy-planning">
+  <span class="num">Sheet 06</span>
+  <h3>Strategy, Planning & Implementation</h3>
+  <p>Strategic alignment, WBS, Gantt charts, RACI matrices and a practical implementation roadmap.</p>
+</a>
+          <a class="topic-card" href="#stakeholders">
+  <span class="num">Sheet 07</span>
+  <h3>Stakeholder Management</h3>
+  <p>Map your stakeholders and build a communication plan that keeps funders, boards and volunteers on side.</p>
+</a>
+          <a class="topic-card" href="#methodologies">
+  <span class="num">Sheet 08</span>
+  <h3>Methodologies</h3>
+  <p>Waterfall, Scrum, Kanban and hybrid approaches &mdash; and how to choose between them honestly.</p>
+</a>
+          <a class="topic-card" href="#ai-in-pm">
+  <span class="num">Sheet 09</span>
+  <h3>AI in Project Management</h3>
+  <p>Low-cost AI tools for scheduling, risk prediction and admin &mdash; and the ethics of using them responsibly.</p>
+</a>
+          <a class="topic-card" href="#resource-library">
+  <span class="num">Sheet 10</span>
+  <h3>Resource Library</h3>
+  <p>Every template, script and diagram from the guide, gathered in one place.</p>
+</a>
+        </div>
+        <div class="grid grid-3" style="margin-top:1.4rem;">
+          <a class="topic-card" href="#interactive-tools">
+  <span class="num">Sheet 11</span>
+  <h3>Interactive Tools</h3>
+  <p>A project readiness checklist, a self-assessment tool, and a short knowledge quiz.</p>
+</a>
+          <a class="topic-card" href="#referencing">
+  <span class="num">Sheet 12</span>
+  <h3>Referencing & Further Reading</h3>
+  <p>The academic, business and Irish government sources behind this guide, in Harvard style.</p>
+</a>
+          <a class="topic-card" href="#standards">
+  <span class="num">Sheet 13</span>
+  <h3>Guide Standards</h3>
+  <p>Site map, colour palette, typography, tone of voice and accessibility checklist.</p>
+</a>
+        </div>
+      </div>
+    </section>
+    <section class="section reveal">
+      <div class="wrap">
+        <div class="callout">
+          <p class="eyebrow" style="color:var(--pink);">Accessibility notes</p>
+          <p>This guide is written in plain English at roughly a general-reading level, set in <strong>Atkinson Hyperlegible</strong> &mdash; a typeface designed specifically to increase legibility for readers with low vision and some forms of dyslexia. Every page keeps a single accessible colour palette, provides text alternatives for every video and audio script, uses accordions and tables instead of dense paragraphs, and supports keyboard navigation with a visible focus outline throughout.</p>
+          <p>See the full <a href="#standards-accessibility">Accessibility checklist</a> for the standards this guide is built to.</p>
+        </div>
+      </div>
+    </section>
+</div>
+<hr style='border:none;border-top:1px solid var(--rule);margin:0;'>
+<div id="foundations">
+<section class="titleblock-hero">
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="blob blob-3" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <div class="reveal in-view">
+      <p class="eyebrow">Foundations</p>
+      <h1>Foundations of Project Management</h1>
+      <p class="lede">What a project actually is, how the major frameworks differ, and where Irish funding and regulation fit in.</p>
+    </div>
+    <div class="reveal in-view">
+    <div class="titleblock">
+  <div class="row">
+    <div class="cell"><span class="label">Sheet</span><span class="value">02 / 13</span></div>
+    <div class="cell"><span class="label">Region</span><span class="value">Ireland</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Topic</span><span class="value">Foundations</span></div>
+    <div class="cell"><span class="label">Level</span><span class="value">Foundation</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Est. time</span><span class="value">7 min read</span></div>
+    <div class="cell"><span class="label">Format</span><span class="value">Text / audio / video</span></div>
+  </div>
+</div>
+    </div>
+  </div>
+</section><section class="section reveal"><div class="wrap"><h2>What project management actually is</h2><p>A project is a temporary undertaking with a defined start, end and outcome &mdash; as distinct from the ongoing, repeatable work of &ldquo;operations&rdquo; (PMI, 2021). Project management is the disciplined application of knowledge, skills, tools and techniques to meet a project&rsquo;s objectives within agreed scope, time, cost and quality constraints (APM, 2019). For a small business that means: the new website, the funding-application-driven programme, the office move. For a charity it means: the six-month pilot service, the capital build, the new CRM roll-out.</p><div class="dim-rule"><span class="tick"></span></div><h2>The major frameworks, in plain English</h2><p><strong>PMBOK&reg;</strong> (PMI, 2021) is a knowledge-area framework: it organises project work into domains such as scope, schedule, cost, quality, risk and stakeholders, and is flexible enough to sit under almost any delivery style.</p><p><strong>PRINCE2</strong> (Axelos, 2017) is a structured, stage-gated method built around a business case that must justify the project at every stage &mdash; useful where a board or funder needs formal sign-off points.</p><p><strong>Agile</strong> (Beck <em>et al.</em>, 2001) favours short, iterative cycles, early delivery of working outputs, and continuous feedback &mdash; well suited to projects where requirements will evolve, such as a new digital service.</p><p><strong>Lean</strong> (Womack and Jones, 1996) focuses on eliminating waste and maximising value to the end user or beneficiary &mdash; a natural fit for resource-constrained charities.</p><p>None of these is &ldquo;correct&rdquo;. Most small organisations end up hybrid: a PRINCE2-style business case and stage gates for governance, delivered through short Agile-style sprints day to day.</p><div class="dim-rule"><span class="tick"></span></div><h2>The Irish context</h2><p>Irish small businesses can draw on structured supports rarely covered in generic PM textbooks: <strong>Local Enterprise Offices (LEOs)</strong> and <strong>Enterprise Ireland</strong> both fund and mentor project-based growth activity, and increasingly require a project plan and milestones as part of any grant application (Enterprise Ireland, 2023). Irish <strong>registered charities</strong> operate under the <strong>Charities Act 2009</strong> and are supervised by the <strong>Charities Regulator</strong>, which expects funded projects to be governed against the <em>Charities Governance Code</em> (Charities Regulator, 2018). Charities also commonly report to funders such as <strong>Pobal</strong>, the <strong>HSE</strong>, or philanthropic trusts, each with its own project reporting cycle &mdash; meaning Irish project managers typically manage to more than one accountability structure at once.</p></div></section><section class="section reveal" style="background:var(--bg-alt);">
+      <div class="wrap">
+        <p class="eyebrow">Multimedia bundle for this section</p>
+        <h2>Read it, template it, watch it, hear it</h2>
+        <div class="layers">
+<details class="layer" open>
+  <summary><span class="n">01</span> Core reading <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p>Use this reading as your reference page: the four frameworks compared, and where Irish funders sit relative to each.</p><table><caption>Framework quick-comparison</caption><tr><th>Framework</th><th>Best for</th><th>Watch-out</th></tr><tr><td>PMBOK&reg;</td><td>Any project; a common vocabulary</td><td>Not a methodology on its own &mdash; needs a delivery style layered on top</td></tr><tr><td>PRINCE2</td><td>Funder/board sign-off, capital projects</td><td>Can feel heavy for a two-person team</td></tr><tr><td>Agile</td><td>Evolving requirements, digital products</td><td>Needs real stakeholder availability for feedback</td></tr><tr><td>Lean</td><td>Resource-constrained, service-focused work</td><td>Requires discipline to keep cutting scope, not just cost</td></tr></table></div>
+</details>
+<details class="layer">
+  <summary><span class="n">02</span> Downloadable template <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p><strong>Template: One-page Project Charter</strong></p><table><tr><th>Field</th><th>Your entry</th></tr><tr><td>Project name</td><td>&nbsp;</td></tr><tr><td>Sponsor / board lead</td><td>&nbsp;</td></tr><tr><td>Purpose (1 sentence)</td><td>&nbsp;</td></tr><tr><td>Success looks like&hellip;</td><td>&nbsp;</td></tr><tr><td>Start / end date</td><td>&nbsp;</td></tr><tr><td>Budget</td><td>&nbsp;</td></tr><tr><td>Funder / client reporting duty</td><td>&nbsp;</td></tr><tr><td>Chosen approach (PRINCE2 / Agile / Hybrid)</td><td>&nbsp;</td></tr></table></div>
+</details>
+<details class="layer">
+  <summary><span class="n">03</span> Video script (1–2 min) <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p style="color:var(--ink-soft);font-size:0.88rem;">Record as a talking-head or slide-over-voice clip. Add captions for accessibility.</p><div class="script-box">[OPEN on host, mid-shot]
+HOST: If you've ever run a project without calling it one, this guide is for you.
+[CUT to on-screen text: "Project = temporary + defined outcome"]
+HOST (V.O.): A project has a start, an end, and a result. Everything else is just operations.
+[CUT to four framework names appearing one by one: PMBOK, PRINCE2, Agile, Lean]
+HOST: Four frameworks, one goal &mdash; getting from idea to outcome without chaos. Most small Irish organisations mix them: formal sign-off where funders need it, short sprints where speed matters.
+[CLOSE on host]
+HOST: Next up &mdash; building the team that will actually deliver it.</div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">04</span> Audio script (30–60 sec) <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p style="color:var(--ink-soft);font-size:0.88rem;">Record for a podcast segment or WhatsApp voice-note style clip. Provide a text transcript alongside the audio.</p><div class="script-box">Welcome back. Quick one today: what actually makes something a "project"? It's temporary, it has a clear end point, and it produces something specific &mdash; a report, a building, a service. If it's ongoing and repeatable, that's operations, not a project. Irish funders like Enterprise Ireland and Pobal increasingly want to see a simple project plan before they'll release funding, so even a one-page charter is worth having ready. More detail, plus a free charter template, is on the Foundations page.</div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">05</span> Diagram to recreate <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><div class="diagram-block"><p><strong>Diagram: The Four Frameworks as a Spectrum</strong><br>Draw a horizontal line labelled from left "Highly structured / stage-gated" to right "Highly iterative / flexible". Place four labelled boxes along it in this order: PRINCE2 (far left), PMBOK&reg; (centre-left, drawn as a large circle overlapping the whole line to show it can sit anywhere), Lean (centre-right), Agile (far right). Beneath the line, add a small bracket spanning the middle third labelled "Most Irish SMEs and charities operate here (hybrid)."</p></div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">06</span> Irish example <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><div class="example"><p class="eyebrow">Illustrative Irish example</p><p>A Dublin-based social enterprise applying for an Enterprise Ireland Competitive Start Fund needed a one-page project plan to accompany its application. Rather than adopting a full PRINCE2 process, the founder used a lightweight charter (name, purpose, milestones, budget, risks) and ran delivery in two-week Agile-style sprints &mdash; satisfying the funder's governance expectation while keeping day-to-day delivery fast.</p></div></div>
+</details>
+</div>
+      </div>
+    </section><section class="section-tight reveal"><div class="wrap">
+      <div class="btn-row"><a class="btn btn-primary" href="#teams-leadership">Next: Teams & Leadership &rarr;</a>
+      <a class="btn" href="#resource-library">Jump to Resource Library</a></div>
+    </div></section>
+</div>
+<hr style='border:none;border-top:1px solid var(--rule);margin:0;'>
+<div id="teams-leadership">
+<section class="titleblock-hero">
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="blob blob-3" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <div class="reveal in-view">
+      <p class="eyebrow">Teams & Leadership</p>
+      <h1>Teams & Leadership</h1>
+      <p class="lede">Tuckman's stages, Belbin's roles, three leadership styles, and a practical approach to conflict.</p>
+    </div>
+    <div class="reveal in-view">
+    <div class="titleblock">
+  <div class="row">
+    <div class="cell"><span class="label">Sheet</span><span class="value">03 / 13</span></div>
+    <div class="cell"><span class="label">Region</span><span class="value">Ireland</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Topic</span><span class="value">Teams & Leadership</span></div>
+    <div class="cell"><span class="label">Level</span><span class="value">Foundation</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Est. time</span><span class="value">7 min read</span></div>
+    <div class="cell"><span class="label">Format</span><span class="value">Text / audio / video</span></div>
+  </div>
+</div>
+    </div>
+  </div>
+</section><section class="section reveal"><div class="wrap"><h2>How teams actually form</h2><p>Bruce Tuckman&rsquo;s model describes teams moving through <strong>Forming, Storming, Norming and Performing</strong>, with a later-added <strong>Adjourning</strong> stage as the project closes (Tuckman, 1965; Tuckman and Jensen, 1977). Small Irish teams rarely move through these neatly &mdash; a volunteer board might sit at Storming for months, or a seasonal staff turnover can reset a team back to Forming mid-project. Naming the stage your team is in is often more useful than trying to rush past it.</p><div class="dim-rule"><span class="tick"></span></div><h2>Knowing who does what: Belbin</h2><p>Meredith Belbin&rsquo;s research identified nine team roles across three clusters &mdash; action-oriented (Shaper, Implementer, Completer-Finisher), people-oriented (Coordinator, Teamworker, Resource Investigator) and thought-oriented (Plant, Monitor Evaluator, Specialist) (Belbin, 2010). In a five-person charity team, most people will carry two or three roles at once. The value isn&rsquo;t the label &mdash; it&rsquo;s spotting the gaps, most often the Completer-Finisher role in small organisations that move fast and rarely close things out properly.</p><div class="dim-rule"><span class="tick"></span></div><h2>Leading a small, often part-time team</h2><p><strong>Transformational leadership</strong> motivates through shared vision and individual development (Bass, 1985); <strong>servant leadership</strong> prioritises removing obstacles for the team over directing it (Greenleaf, 1977); <strong>adaptive leadership</strong> treats leadership as a practice of mobilising people through difficult, non-technical challenges (Heifetz, Grashow and Linsky, 2009). Irish charities, where a manager often leads paid staff, volunteers and a board simultaneously, tend to need all three at different moments &mdash; vision-setting with the board, servant leadership with stretched staff, and adaptive leadership when a funding cut forces a hard reprioritisation.</p><div class="dim-rule"><span class="tick"></span></div><h2>Managing conflict without letting it fester</h2><p>Thomas and Kilmann&rsquo;s (1974) conflict-mode model sets out five responses &mdash; competing, collaborating, compromising, avoiding and accommodating &mdash; none inherently right, but each suited to different situations. In small teams, avoiding is the most common default and the most damaging over time: unresolved conflict between two long-standing volunteers, for instance, can outlast several project managers. A short, structured check-in cadence surfaces friction before it hardens.</p></div></section><section class="section reveal" style="background:var(--bg-alt);">
+      <div class="wrap">
+        <p class="eyebrow">Multimedia bundle for this section</p>
+        <h2>Read it, template it, watch it, hear it</h2>
+        <div class="layers">
+<details class="layer" open>
+  <summary><span class="n">01</span> Core reading <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p>Use the reading above alongside the role map below when you next form or re-form a project team.</p><table><caption>Belbin role clusters, simplified</caption><tr><th>Cluster</th><th>Roles</th><th>Small-team question to ask</th></tr><tr><td>Action</td><td>Shaper, Implementer, Completer-Finisher</td><td>Who will actually finish this, not just start it?</td></tr><tr><td>People</td><td>Coordinator, Teamworker, Resource Investigator</td><td>Who holds the group together and brings in outside help?</td></tr><tr><td>Thought</td><td>Plant, Monitor Evaluator, Specialist</td><td>Who generates ideas, and who tests them critically?</td></tr></table></div>
+</details>
+<details class="layer">
+  <summary><span class="n">02</span> Downloadable template <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p><strong>Template: Team Charter &amp; Ways of Working</strong></p><table><tr><th>Field</th><th>Your entry</th></tr><tr><td>Team members &amp; roles (incl. volunteers)</td><td>&nbsp;</td></tr><tr><td>Decision-making rule (who decides what)</td><td>&nbsp;</td></tr><tr><td>Meeting cadence</td><td>&nbsp;</td></tr><tr><td>How we raise a conflict or concern</td><td>&nbsp;</td></tr><tr><td>Current Tuckman stage &amp; one action to move forward</td><td>&nbsp;</td></tr></table></div>
+</details>
+<details class="layer">
+  <summary><span class="n">03</span> Video script (1–2 min) <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p style="color:var(--ink-soft);font-size:0.88rem;">Record as a talking-head or slide-over-voice clip. Add captions for accessibility.</p><div class="script-box">[OPEN on host]
+HOST: Every team goes through the same four stages &mdash; whether you name them or not.
+[ON-SCREEN TEXT, one at a time]: Forming &rarr; Storming &rarr; Norming &rarr; Performing.
+HOST: The mistake isn't hitting Storming &mdash; that's normal. It's pretending you're not in it.
+[CUT to simple role icons: Shaper, Coordinator, Completer-Finisher]
+HOST: Belbin's roles help you spot gaps fast &mdash; ask yourself: who in this room will actually finish the task, not just start it?
+[CLOSE]
+HOST: Next: putting a name on your team's biggest current risk.</div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">04</span> Audio script (30–60 sec) <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p style="color:var(--ink-soft);font-size:0.88rem;">Record for a podcast segment or WhatsApp voice-note style clip. Provide a text transcript alongside the audio.</p><div class="script-box">Two quick team-management ideas for this week. First: if your project team feels stuck in disagreement, that's probably Tuckman's "Storming" stage &mdash; it's normal, and naming it out loud often helps a group move past it. Second: look around your team and ask who will actually finish tasks, not just start them. That's the Completer-Finisher role, and small teams are often short of it. Templates for a team charter are on the Teams and Leadership page.</div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">05</span> Diagram to recreate <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><div class="diagram-block"><p><strong>Diagram: Tuckman's Stages as a Rising Path</strong><br>Draw a stepped upward staircase with five steps labelled left to right: Forming, Storming, Norming, Performing, Adjourning. Add a dip (a small downward arrow back to Storming) between Norming and Performing labelled "Re-forming after staff/volunteer turnover" to show teams can regress, particularly relevant to seasonal or volunteer-heavy Irish teams.</p></div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">06</span> Irish example <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><div class="example"><p class="eyebrow">Illustrative Irish example</p><p>A rural Irish community employment scheme saw its project team reset from Performing back to Forming every autumn as seasonal placements ended. The coordinator introduced a one-page team charter re-signed at the start of each new placement cycle, cutting the time spent re-establishing working norms from several weeks to a few days.</p></div></div>
+</details>
+</div>
+      </div>
+    </section><section class="section-tight reveal"><div class="wrap">
+      <div class="btn-row"><a class="btn btn-primary" href="#risk-management">Next: Risk Management &rarr;</a>
+      <a class="btn" href="#resource-library">Jump to Resource Library</a></div>
+    </div></section>
+</div>
+<hr style='border:none;border-top:1px solid var(--rule);margin:0;'>
+<div id="risk-management">
+<section class="titleblock-hero">
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="blob blob-3" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <div class="reveal in-view">
+      <p class="eyebrow">Risk Management</p>
+      <h1>Risk Management</h1>
+      <p class="lede">Identify, score and respond to risk with a simple register.</p>
+    </div>
+    <div class="reveal in-view">
+    <div class="titleblock">
+  <div class="row">
+    <div class="cell"><span class="label">Sheet</span><span class="value">04 / 13</span></div>
+    <div class="cell"><span class="label">Region</span><span class="value">Ireland</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Topic</span><span class="value">Risk Management</span></div>
+    <div class="cell"><span class="label">Level</span><span class="value">Foundation</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Est. time</span><span class="value">6 min read</span></div>
+    <div class="cell"><span class="label">Format</span><span class="value">Text / audio / video</span></div>
+  </div>
+</div>
+    </div>
+  </div>
+</section><section class="section reveal"><div class="wrap"><h2>Identifying risk before it identifies you</h2><p>Risk is &ldquo;an uncertain event or condition that, if it occurs, has a positive or negative effect on project objectives&rdquo; (PMI, 2021). Identification techniques range from structured brainstorming and checklists to SWOT analysis and expert interviews (Hillson, 2009). For small organisations, the most reliable technique is simply scheduling a recurring 20-minute risk conversation &mdash; most risk goes unmanaged not because it&rsquo;s unknown, but because no one owns the time to discuss it.</p><div class="dim-rule"><span class="tick"></span></div><h2>Analysing and prioritising</h2><p>Once identified, risks are typically scored on <strong>likelihood</strong> and <strong>impact</strong>, often visualised on a probability&ndash;impact matrix (APM, 2019). This need not be sophisticated: a simple 1&ndash;5 scale on each axis, multiplied to give a priority score, is enough to focus a small team&rsquo;s limited time on the handful of risks that matter most.</p><div class="dim-rule"><span class="tick"></span></div><h2>Responding: the four classic strategies</h2><p>PMI (2021) sets out four negative-risk responses &mdash; <strong>avoid</strong> (eliminate the threat), <strong>mitigate</strong> (reduce likelihood or impact), <strong>transfer</strong> (insurance, contracts, sub-contracting) and <strong>accept</strong> (proceed and monitor, appropriate for low-priority risks). Each response should have a named owner &mdash; an unowned risk is, in practice, an unmanaged one.</p><div class="dim-rule"><span class="tick"></span></div><h2>Risk that is distinctly Irish, and distinctly small-organisation</h2><p>Small businesses face concentration risk (a small client base), currency and Brexit-related supply risk, and cash-flow risk tied to slow payment cycles. Charities face funding-cycle risk (multi-year programmes funded year-to-year), volunteer dependency risk, and compliance risk under the <strong>Charities Governance Code</strong> (Charities Regulator, 2018) and <strong>GDPR</strong> as enforced by the Irish <strong>Data Protection Commission</strong>. Both sectors should treat key-person dependency &mdash; the risk of losing one critical staff member or volunteer &mdash; as a standing agenda item.</p></div></section><section class="section reveal" style="background:var(--bg-alt);">
+      <div class="wrap">
+        <p class="eyebrow">Multimedia bundle for this section</p>
+        <h2>Read it, template it, watch it, hear it</h2>
+        <div class="layers">
+<details class="layer" open>
+  <summary><span class="n">01</span> Core reading <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p>Read the four stages above, then use the register template below to run your first risk workshop &mdash; aim for 8&ndash;12 risks, not fifty.</p></div>
+</details>
+<details class="layer">
+  <summary><span class="n">02</span> Downloadable template <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p><strong>Template: Risk Register</strong></p><table><caption>Populate one row per risk; review monthly</caption><tr><th>Risk</th><th>Likelihood (1&ndash;5)</th><th>Impact (1&ndash;5)</th><th>Score</th><th>Response</th><th>Owner</th></tr><tr><td>e.g. Key funder does not renew grant</td><td>3</td><td>5</td><td>15</td><td>Mitigate &ndash; diversify funder base</td><td>Director</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></div>
+</details>
+<details class="layer">
+  <summary><span class="n">03</span> Video script (1–2 min) <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p style="color:var(--ink-soft);font-size:0.88rem;">Record as a talking-head or slide-over-voice clip. Add captions for accessibility.</p><div class="script-box">[OPEN on host holding a printed grid]
+HOST: Risk management doesn't need software. It needs twenty minutes and this grid.
+[HOLD UP a 5x5 grid, likelihood on one axis, impact on the other]
+HOST: Score every risk one to five on how likely it is, and one to five on how much it would hurt. Multiply them.
+[POINT to top-right corner]
+HOST: Anything scoring high on both goes to the top of your list &mdash; and gets a named owner, not just a note.
+[CLOSE]
+HOST: Next: the governance and ethics standards your risk decisions need to sit inside.</div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">04</span> Audio script (30–60 sec) <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p style="color:var(--ink-soft);font-size:0.88rem;">Record for a podcast segment or WhatsApp voice-note style clip. Provide a text transcript alongside the audio.</p><div class="script-box">If you only do one thing after listening to this: block twenty minutes this month for a risk conversation with your team. List what could go wrong, score each item one to five on likelihood and one to five on impact, and give the top few a named owner. For Irish charities, funding-cycle risk and volunteer dependency almost always belong on that list. Full risk register template is on the Risk Management page.</div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">05</span> Diagram to recreate <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><div class="diagram-block"><p><strong>Diagram: 5x5 Probability&ndash;Impact Matrix</strong><br>Draw a 5-by-5 grid. Label the vertical axis "Likelihood" from 1 (bottom) to 5 (top). Label the horizontal axis "Impact" from 1 (left) to 5 (right). Shade the bottom-left cells green (low priority), the diagonal band pale amber (monitor), and the top-right cells red (act now). Plot 3&ndash;4 example dots representing sample risks with small labels.</p></div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">06</span> Irish example <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><div class="example"><p class="eyebrow">Illustrative Irish example</p><p>An Irish youth charity delivering a HSE-funded mental health programme identified &ldquo;single funder dependency&rdquo; as its top-scoring risk during its first risk workshop. Its response &mdash; diversify toward two additional funders within 18 months &mdash; became a standing board agenda item, tracked quarterly rather than left as a one-off entry in a document nobody reopened.</p></div></div>
+</details>
+</div>
+      </div>
+    </section><section class="section-tight reveal"><div class="wrap">
+      <div class="btn-row"><a class="btn btn-primary" href="#ethics-governance">Next: Ethics, Sustainability & Governance &rarr;</a>
+      <a class="btn" href="#resource-library">Jump to Resource Library</a></div>
+    </div></section>
+</div>
+<hr style='border:none;border-top:1px solid var(--rule);margin:0;'>
+<div id="ethics-governance">
+<section class="titleblock-hero">
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="blob blob-3" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <div class="reveal in-view">
+      <p class="eyebrow">Ethics, Sustainability & Governance</p>
+      <h1>Ethics, Sustainability & Governance</h1>
+      <p class="lede">The PMI Code of Ethics, the UN SDGs, and Irish charity and company governance requirements.</p>
+    </div>
+    <div class="reveal in-view">
+    <div class="titleblock">
+  <div class="row">
+    <div class="cell"><span class="label">Sheet</span><span class="value">05 / 13</span></div>
+    <div class="cell"><span class="label">Region</span><span class="value">Ireland</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Topic</span><span class="value">Ethics, Sustainability & Governance</span></div>
+    <div class="cell"><span class="label">Level</span><span class="value">Foundation</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Est. time</span><span class="value">6 min read</span></div>
+    <div class="cell"><span class="label">Format</span><span class="value">Text / audio / video</span></div>
+  </div>
+</div>
+    </div>
+  </div>
+</section><section class="section reveal"><div class="wrap"><h2>A professional code, not just good intentions</h2><p>The <strong>PMI Code of Ethics and Professional Conduct</strong> commits project professionals to four values: responsibility, respect, fairness and honesty (PMI, 2021). These aren&rsquo;t abstractions &mdash; in practice they mean things like disclosing a conflict of interest to a board before it affects a procurement decision, or being honest with a funder about a project falling behind schedule rather than quietly hoping to catch up.</p><div class="dim-rule"><span class="tick"></span></div><h2>Sustainability as a design constraint, not an add-on</h2><p>The UN <strong>Sustainable Development Goals</strong> (United Nations, 2015) increasingly shape both business and charity funding criteria in Ireland, with Enterprise Ireland and many philanthropic funders now asking applicants to identify which SDGs a project advances. Treating sustainability &mdash; environmental, social and financial &mdash; as a design constraint from the outset, rather than a report written after the fact, tends to produce both better outcomes and stronger funding applications.</p><div class="dim-rule"><span class="tick"></span></div><h2>Governance: who is actually accountable</h2><p>Governance is the system by which an organisation is directed and controlled (Cadbury, 1992). For Irish charities, this means compliance with the <strong>Charities Governance Code</strong> (Charities Regulator, 2018), which sets minimum standards across leading the organisation, exercising control, working effectively as a board, and behaving with integrity. For companies, the <strong>Companies Act 2014</strong> sets director duties that apply directly to how projects are approved and funded. A project sponsor should always be able to name, in one sentence, who has authority to stop the project.</p></div></section><section class="section reveal" style="background:var(--bg-alt);">
+      <div class="wrap">
+        <p class="eyebrow">Multimedia bundle for this section</p>
+        <h2>Read it, template it, watch it, hear it</h2>
+        <div class="layers">
+<details class="layer" open>
+  <summary><span class="n">01</span> Core reading <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p>Use the reading above to check a project against ethics, sustainability and governance before it launches &mdash; not after something goes wrong.</p></div>
+</details>
+<details class="layer">
+  <summary><span class="n">02</span> Downloadable template <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p><strong>Template: Pre-launch Ethics &amp; Governance Check</strong></p><ul class="checklist"><li>Conflicts of interest declared and recorded</li><li>Relevant SDG(s) identified and stated in the project brief</li><li>Board/sponsor sign-off obtained and minuted</li><li>Data protection (GDPR) impact considered for any personal data involved</li><li>Named person with authority to pause or stop the project</li><li>Funder reporting obligations mapped against project milestones</li></ul></div>
+</details>
+<details class="layer">
+  <summary><span class="n">03</span> Video script (1–2 min) <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p style="color:var(--ink-soft);font-size:0.88rem;">Record as a talking-head or slide-over-voice clip. Add captions for accessibility.</p><div class="script-box">[OPEN on host]
+HOST: Before you launch a project, ask one uncomfortable question: who can actually stop this if it goes wrong?
+[ON-SCREEN TEXT: "Name the person. Write it down."]
+HOST: That's governance in one sentence. Add to it: is anyone's interest in this project undeclared? And which UN Sustainable Development Goal does this project actually move forward?
+[CUT to SDG icon row]
+HOST: Irish funders increasingly ask that question on the application form &mdash; have your answer ready before they do.
+[CLOSE]
+HOST: Next: turning good intentions into an actual plan.</div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">04</span> Audio script (30–60 sec) <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p style="color:var(--ink-soft);font-size:0.88rem;">Record for a podcast segment or WhatsApp voice-note style clip. Provide a text transcript alongside the audio.</p><div class="script-box">A short governance habit worth building: before any new project launches, write down, in one sentence, who has the authority to stop it. If you can't answer that clearly, your governance structure needs attention before your project plan does. Pair that with a quick conflict-of-interest check and a note on which UN Sustainable Development Goal the work supports &mdash; Irish funders ask for both increasingly often. Full checklist on the Ethics, Sustainability and Governance page.</div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">05</span> Diagram to recreate <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><div class="diagram-block"><p><strong>Diagram: The Governance Triangle</strong><br>Draw a triangle with three labelled corners: "Board / Trustees" (top), "Sponsor / Director" (bottom left), "Project Team" (bottom right). Along each edge, write the accountability flow: Board to Sponsor = "delegates authority &amp; approves budget"; Sponsor to Team = "sets direction, removes blockers"; Team to Board (dotted line back up) = "reports progress &amp; risk". Add a small padlock icon at the top corner labelled "Ultimate accountability."</p></div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">06</span> Irish example <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><div class="example"><p class="eyebrow">Illustrative Irish example</p><p>An Irish arts charity applying to a philanthropic trust was asked, for the first time, to state which SDGs its new outreach programme supported. Mapping the project against SDG 4 (Quality Education) and SDG 10 (Reduced Inequalities) before submission not only strengthened the application but clarified the project's own success measures for the board.</p></div></div>
+</details>
+</div>
+      </div>
+    </section><section class="section-tight reveal"><div class="wrap">
+      <div class="btn-row"><a class="btn btn-primary" href="#strategy-planning">Next: Strategy, Planning & Implementation &rarr;</a>
+      <a class="btn" href="#resource-library">Jump to Resource Library</a></div>
+    </div></section>
+</div>
+<hr style='border:none;border-top:1px solid var(--rule);margin:0;'>
+<div id="strategy-planning">
+<section class="titleblock-hero">
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="blob blob-3" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <div class="reveal in-view">
+      <p class="eyebrow">Strategy, Planning & Implementation</p>
+      <h1>Strategy, Planning & Implementation</h1>
+      <p class="lede">Link every project to strategy, break the work down, schedule it, assign accountability, and plan the change.</p>
+    </div>
+    <div class="reveal in-view">
+    <div class="titleblock">
+  <div class="row">
+    <div class="cell"><span class="label">Sheet</span><span class="value">06 / 13</span></div>
+    <div class="cell"><span class="label">Region</span><span class="value">Ireland</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Topic</span><span class="value">Strategy, Planning & Implementation</span></div>
+    <div class="cell"><span class="label">Level</span><span class="value">Foundation</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Est. time</span><span class="value">7 min read</span></div>
+    <div class="cell"><span class="label">Format</span><span class="value">Text / audio / video</span></div>
+  </div>
+</div>
+    </div>
+  </div>
+</section><section class="section reveal"><div class="wrap"><h2>Starting from strategy, not from tasks</h2><p>Every project should trace back to a strategic objective &mdash; Kaplan and Norton&rsquo;s (1996) work on strategic alignment argues that initiatives disconnected from strategy consume resource without building organisational value. In practice: before opening a project plan, write one sentence linking the project to your organisation&rsquo;s strategic plan or, for a charity, its stated charitable objects.</p><div class="dim-rule"><span class="tick"></span></div><h2>Breaking work down: the WBS</h2><p>A <strong>Work Breakdown Structure (WBS)</strong> decomposes a project into progressively smaller, manageable components (PMI, 2021). The discipline is useful even at small scale: a WBS forces you to name every deliverable before estimating time or cost, catching missing work early rather than mid-project.</p><div class="dim-rule"><span class="tick"></span></div><h2>Scheduling and accountability: Gantt and RACI</h2><p>Henry Gantt&rsquo;s chart (Gantt, 1910; popularised through the 20th century) remains the clearest way to visualise sequence, duration and overlap of tasks. A <strong>RACI matrix</strong> (Responsible, Accountable, Consulted, Informed) then assigns clarity to who does what &mdash; particularly valuable where a project spans staff, volunteers and a board, and ambiguity about accountability is a common cause of delay.</p><div class="dim-rule"><span class="tick"></span></div><h2>From plan to reality: implementation</h2><p>Kotter&rsquo;s (1996) eight-step model for leading change &mdash; from creating urgency through to anchoring new approaches in organisational culture &mdash; remains one of the most cited implementation frameworks, and applies as much to a ten-person charity adopting new case-management software as it does to a large corporate transformation. The common implementation failure in small organisations isn&rsquo;t poor planning; it&rsquo;s under-resourcing the transition itself &mdash; training, communication, and the temporary dip in productivity change always causes.</p></div></section><section class="section reveal" style="background:var(--bg-alt);">
+      <div class="wrap">
+        <p class="eyebrow">Multimedia bundle for this section</p>
+        <h2>Read it, template it, watch it, hear it</h2>
+        <div class="layers">
+<details class="layer" open>
+  <summary><span class="n">01</span> Core reading <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p>Use the reading above in sequence: link to strategy, break down the work, schedule it, then plan the change itself &mdash; not just the delivery.</p></div>
+</details>
+<details class="layer">
+  <summary><span class="n">02</span> Downloadable template <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p><strong>Template: RACI Matrix</strong></p><table><caption>R = Responsible, A = Accountable, C = Consulted, I = Informed</caption><tr><th>Task</th><th>Project lead</th><th>Board / Sponsor</th><th>Delivery team</th><th>External partner</th></tr><tr><td>Approve budget</td><td>C</td><td>A</td><td>I</td><td>I</td></tr><tr><td>Deliver core activity</td><td>A</td><td>I</td><td>R</td><td>C</td></tr><tr><td>Report to funder</td><td>R</td><td>A</td><td>C</td><td>I</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr></table></div>
+</details>
+<details class="layer">
+  <summary><span class="n">03</span> Video script (1–2 min) <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p style="color:var(--ink-soft);font-size:0.88rem;">Record as a talking-head or slide-over-voice clip. Add captions for accessibility.</p><div class="script-box">[OPEN on host at a whiteboard with a Gantt-style grid drawn]
+HOST: Three tools, five minutes. First: your Work Breakdown Structure &mdash; every deliverable, named, before you estimate a single date.
+[POINT to Gantt bars]
+HOST: Then a Gantt chart to sequence it &mdash; what happens in what order, and what overlaps.
+[HOLD UP RACI grid]
+HOST: Then RACI, so everyone knows if they're Responsible for doing it, or just Accountable for it happening.
+[CLOSE]
+HOST: Next: keeping the people affected by all of this on side.</div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">04</span> Audio script (30–60 sec) <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p style="color:var(--ink-soft);font-size:0.88rem;">Record for a podcast segment or WhatsApp voice-note style clip. Provide a text transcript alongside the audio.</p><div class="script-box">Quick planning check for your next project: can you name every deliverable before you set a single date? That's your Work Breakdown Structure done. Then sequence those deliverables on a simple Gantt chart, and assign a RACI letter &mdash; Responsible, Accountable, Consulted or Informed &mdash; to every task with more than one person nearby. Most planning gaps in small teams come from skipping that last step. Templates on the Strategy, Planning and Implementation page.</div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">05</span> Diagram to recreate <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><div class="diagram-block"><p><strong>Diagram: WBS to Gantt to RACI Flow</strong><br>Draw three connected boxes left to right. Box 1: an upside-down tree labelled "WBS" with a project title at top branching into 3&ndash;4 deliverables, each branching into 2&ndash;3 tasks. Box 2: a simple Gantt chart with 4 horizontal bars of varying length and start point labelled "Schedule". Box 3: a small grid labelled "RACI" with R/A/C/I letters in cells. Connect the three boxes with arrows left to right labelled "Break down" then "Sequence" then "Assign accountability."</p></div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">06</span> Irish example <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><div class="example"><p class="eyebrow">Illustrative Irish example</p><p>A Cork-based social enterprise moving to a new premises used a one-page WBS to discover, before signing a lease, that &ldquo;fit-out&rdquo; had never been broken into its component tasks &mdash; electrics, signage, accessibility works &mdash; and was consequently under-budgeted by several thousand euro. Catching this at the planning stage, rather than mid-move, avoided a funding shortfall.</p></div></div>
+</details>
+</div>
+      </div>
+    </section><section class="section-tight reveal"><div class="wrap">
+      <div class="btn-row"><a class="btn btn-primary" href="#stakeholders">Next: Stakeholder Management &rarr;</a>
+      <a class="btn" href="#resource-library">Jump to Resource Library</a></div>
+    </div></section>
+</div>
+<hr style='border:none;border-top:1px solid var(--rule);margin:0;'>
+<div id="stakeholders">
+<section class="titleblock-hero">
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="blob blob-3" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <div class="reveal in-view">
+      <p class="eyebrow">Stakeholder Management</p>
+      <h1>Stakeholder Management</h1>
+      <p class="lede">Map stakeholders by power and interest, and build a communication plan.</p>
+    </div>
+    <div class="reveal in-view">
+    <div class="titleblock">
+  <div class="row">
+    <div class="cell"><span class="label">Sheet</span><span class="value">07 / 13</span></div>
+    <div class="cell"><span class="label">Region</span><span class="value">Ireland</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Topic</span><span class="value">Stakeholder Management</span></div>
+    <div class="cell"><span class="label">Level</span><span class="value">Foundation</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Est. time</span><span class="value">6 min read</span></div>
+    <div class="cell"><span class="label">Format</span><span class="value">Text / audio / video</span></div>
+  </div>
+</div>
+    </div>
+  </div>
+</section><section class="section reveal"><div class="wrap"><h2>Why stakeholders decide whether a project succeeds</h2><p>R. Edward Freeman&rsquo;s (1984) stakeholder theory defines a stakeholder as any group or individual who can affect, or is affected by, an organisation&rsquo;s objectives. Project success is rarely purely technical &mdash; a project delivered on time and on budget can still fail if the people it depends on, or affects, were never properly engaged (Bourne, 2009).</p><div class="dim-rule"><span class="tick"></span></div><h2>Mapping stakeholders: power and interest</h2><p>The classic power&ndash;interest grid (Mendelow, 1981) plots stakeholders by how much influence they hold and how much interest they have in the project, guiding four broad engagement strategies: manage closely, keep satisfied, keep informed, and monitor. For Irish charities, a funder typically sits in &ldquo;manage closely&rdquo; even when day-to-day interest is low, purely because of the power they hold over continuation funding.</p><div class="dim-rule"><span class="tick"></span></div><h2>Building a communication plan that people actually read</h2><p>A communication plan should specify, for each key stakeholder group, the information they need, the channel, the frequency, and who is responsible for sending it (PMI, 2021). Over-communication to low-interest stakeholders is as damaging as under-communication to high-power ones &mdash; both waste attention that could go where it matters.</p><div class="dim-rule"><span class="tick"></span></div><h2>Irish stakeholder groups worth naming explicitly</h2><p>Irish charity projects typically juggle: the <strong>board of trustees</strong> (governance and legal accountability), <strong>funders</strong> (financial control and reporting requirements), <strong>volunteers</strong> (delivery capacity, but with limited formal obligation to the organisation), <strong>service users or beneficiaries</strong>, and increasingly the <strong>Charities Regulator</strong> as a compliance stakeholder. Small businesses should equally name clients, suppliers, and &mdash; where relevant &mdash; Revenue and the Companies Registration Office as compliance stakeholders whose expectations shape the project.</p></div></section><section class="section reveal" style="background:var(--bg-alt);">
+      <div class="wrap">
+        <p class="eyebrow">Multimedia bundle for this section</p>
+        <h2>Read it, template it, watch it, hear it</h2>
+        <div class="layers">
+<details class="layer" open>
+  <summary><span class="n">01</span> Core reading <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p>Use the mapping method above before you write a single communication &mdash; knowing who needs what, and how often, saves significant time later.</p></div>
+</details>
+<details class="layer">
+  <summary><span class="n">02</span> Downloadable template <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p><strong>Template: Stakeholder Map &amp; Communication Plan</strong></p><table><tr><th>Stakeholder</th><th>Power</th><th>Interest</th><th>Strategy</th><th>Channel &amp; frequency</th></tr><tr><td>Funder / donor</td><td>High</td><td>Med</td><td>Manage closely</td><td>Formal report, quarterly</td></tr><tr><td>Board of trustees</td><td>High</td><td>High</td><td>Manage closely</td><td>Meeting update, monthly</td></tr><tr><td>Volunteers</td><td>Low&ndash;Med</td><td>High</td><td>Keep informed</td><td>Team huddle, weekly</td></tr><tr><td>Service users</td><td>Low</td><td>High</td><td>Keep informed / consult</td><td>Feedback session, per milestone</td></tr></table></div>
+</details>
+<details class="layer">
+  <summary><span class="n">03</span> Video script (1–2 min) <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p style="color:var(--ink-soft);font-size:0.88rem;">Record as a talking-head or slide-over-voice clip. Add captions for accessibility.</p><div class="script-box">[OPEN on host holding a simple 2x2 grid]
+HOST: Every stakeholder fits somewhere on two questions: how much power do they have, and how much interest?
+[DRAW an X in the top-right quadrant]
+HOST: High power, high interest &mdash; that's your board, your key funder. Manage them closely, and don't let a monthly update slip.
+[POINT to bottom-left]
+HOST: Low power, low interest? A quick note is plenty &mdash; don't drown them in detail they didn't ask for.
+[CLOSE]
+HOST: Get this map right, and half your stakeholder problems disappear before they start. Next: choosing how you'll actually deliver the work.</div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">04</span> Audio script (30–60 sec) <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p style="color:var(--ink-soft);font-size:0.88rem;">Record for a podcast segment or WhatsApp voice-note style clip. Provide a text transcript alongside the audio.</p><div class="script-box">One habit that prevents most stakeholder problems: before your next project starts, list everyone who can affect it or is affected by it, and place each one on a simple grid &mdash; power on one axis, interest on the other. Your highest-power, highest-interest people, usually your board or your main funder, get closely managed, regular updates. Everyone else gets a lighter touch matched to their actual interest. Full template on the Stakeholder Management page.</div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">05</span> Diagram to recreate <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><div class="diagram-block"><p><strong>Diagram: Power&ndash;Interest Grid</strong><br>Draw a 2x2 grid. Vertical axis: "Power", low at bottom, high at top. Horizontal axis: "Interest", low at left, high at right. Label the four quadrants: bottom-left "Monitor", top-left "Keep satisfied", bottom-right "Keep informed", top-right "Manage closely". Place example stakeholder labels in each quadrant: "Funder" and "Board" top-right; "Volunteers" and "Service users" bottom-right; "Regulator" top-left; "General public" bottom-left.</p></div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">06</span> Irish example <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><div class="example"><p class="eyebrow">Illustrative Irish example</p><p>An Irish homelessness charity discovered, after mapping its stakeholders for a new outreach project, that its funder had been receiving the same lengthy monthly report as frontline volunteers &mdash; while the board, the actual decision-maker on continuation funding, had been receiving nothing beyond a brief verbal update. Rebalancing the communication plan toward the board's actual power and interest resolved a funding-renewal delay within one reporting cycle.</p></div></div>
+</details>
+</div>
+      </div>
+    </section><section class="section-tight reveal"><div class="wrap">
+      <div class="btn-row"><a class="btn btn-primary" href="#methodologies">Next: Methodologies &rarr;</a>
+      <a class="btn" href="#resource-library">Jump to Resource Library</a></div>
+    </div></section>
+</div>
+<hr style='border:none;border-top:1px solid var(--rule);margin:0;'>
+<div id="methodologies">
+<section class="titleblock-hero">
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="blob blob-3" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <div class="reveal in-view">
+      <p class="eyebrow">Methodologies</p>
+      <h1>Methodologies</h1>
+      <p class="lede">Waterfall, Scrum, Kanban, and the honest hybrid most small Irish organisations actually run.</p>
+    </div>
+    <div class="reveal in-view">
+    <div class="titleblock">
+  <div class="row">
+    <div class="cell"><span class="label">Sheet</span><span class="value">08 / 13</span></div>
+    <div class="cell"><span class="label">Region</span><span class="value">Ireland</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Topic</span><span class="value">Methodologies</span></div>
+    <div class="cell"><span class="label">Level</span><span class="value">Foundation</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Est. time</span><span class="value">6 min read</span></div>
+    <div class="cell"><span class="label">Format</span><span class="value">Text / audio / video</span></div>
+  </div>
+</div>
+    </div>
+  </div>
+</section><section class="section reveal"><div class="wrap"><h2>Waterfall: sequential and predictable</h2><p>The waterfall approach &mdash; plan fully, then execute in sequential phases &mdash; traces to Royce&rsquo;s (1970) description of sequential software development. It suits projects with fixed, well-understood requirements: a capital build, a compliance-driven system roll-out, or any project where a funder requires a fixed scope and budget agreed up front.</p><div class="dim-rule"><span class="tick"></span></div><h2>Agile: Scrum and Kanban</h2><p><strong>Scrum</strong> (Schwaber and Sutherland, 2020) organises work into fixed-length sprints with defined roles (Product Owner, Scrum Master, Development Team) and ceremonies (planning, daily stand-up, review, retrospective). <strong>Kanban</strong> (Anderson, 2010) instead visualises flow on a board of columns &mdash; typically To Do, In Progress, Done &mdash; and limits how much work is in progress at once, without fixed sprint lengths. Kanban tends to suit small, resource-constrained teams better than Scrum, since it requires less ceremony and role overhead.</p><div class="dim-rule"><span class="tick"></span></div><h2>Hybrid: the honest default for most small organisations</h2><p>In practice, most Irish SMEs and charities run a <strong>hybrid</strong> model: a waterfall-style business case and milestone structure to satisfy a funder or board, with Agile or Kanban-style delivery underneath to manage the actual day-to-day work (Conforto <em>et al.</em>, 2014). There is no methodological purity prize for choosing one framework exclusively &mdash; the right test is whether your chosen approach matches your funder&rsquo;s reporting needs and your team&rsquo;s working reality.</p></div></section><section class="section reveal" style="background:var(--bg-alt);">
+      <div class="wrap">
+        <p class="eyebrow">Multimedia bundle for this section</p>
+        <h2>Read it, template it, watch it, hear it</h2>
+        <div class="layers">
+<details class="layer" open>
+  <summary><span class="n">01</span> Core reading <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p>Read the three approaches above, then use the decision guide below to choose &mdash; or confirm your current hybrid approach is deliberate rather than accidental.</p><table><caption>Choosing an approach</caption><tr><th>If&hellip;</th><th>Lean toward</th></tr><tr><td>Requirements are fixed, funder needs a fixed budget upfront</td><td>Waterfall</td></tr><tr><td>Requirements will evolve, you need frequent user feedback</td><td>Scrum</td></tr><tr><td>Ongoing, variable-volume work (e.g. a helpdesk, a caseload)</td><td>Kanban</td></tr><tr><td>Funder needs milestones, team needs flexibility</td><td>Hybrid</td></tr></table></div>
+</details>
+<details class="layer">
+  <summary><span class="n">02</span> Downloadable template <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p><strong>Template: Kanban Board Columns</strong></p><table><tr><th>Backlog</th><th>To Do (this week)</th><th>In Progress (limit 3)</th><th>Review</th><th>Done</th></tr><tr><td>Ideas &amp; requests land here</td><td>Committed for this cycle</td><td>Actively being worked &mdash; cap the count</td><td>Awaiting sign-off</td><td>Completed &amp; reported</td></tr></table></div>
+</details>
+<details class="layer">
+  <summary><span class="n">03</span> Video script (1–2 min) <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p style="color:var(--ink-soft);font-size:0.88rem;">Record as a talking-head or slide-over-voice clip. Add captions for accessibility.</p><div class="script-box">[OPEN on host with a whiteboard split into three sections]
+HOST: Waterfall, Scrum, or Kanban &mdash; here's how to choose in thirty seconds.
+[POINT to section 1]
+HOST: Fixed requirements, fixed budget, funder wants a plan upfront? Waterfall.
+[POINT to section 2]
+HOST: Requirements will change, you need regular feedback? Scrum, in short sprints.
+[POINT to section 3]
+HOST: Ongoing, variable workload &mdash; like a caseload or helpdesk? Kanban, with a simple board.
+[CLOSE]
+HOST: Most teams end up mixing all three. That's not a failure &mdash; that's realistic. Next: where AI actually helps with all of this.</div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">04</span> Audio script (30–60 sec) <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p style="color:var(--ink-soft);font-size:0.88rem;">Record for a podcast segment or WhatsApp voice-note style clip. Provide a text transcript alongside the audio.</p><div class="script-box">If you're choosing between project methodologies, here's the honest shortcut: it's rarely one or the other. Use a waterfall-style plan and milestones where your funder or board needs upfront certainty, and run the actual week-to-week work through a simple Kanban board &mdash; three columns, To Do, In Progress, Done, with a cap on how much is in progress at once. That hybrid approach covers most small Irish organisations better than picking one methodology and forcing everything through it. More detail on the Methodologies page.</div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">05</span> Diagram to recreate <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><div class="diagram-block"><p><strong>Diagram: Hybrid Delivery Model</strong><br>Draw two horizontal layers. Top layer: a straight left-to-right arrow labelled "Waterfall milestones (funder / board view)" with 4 milestone flags marked along it (Initiate, Plan approved, Mid-point review, Close). Bottom layer, beneath and connected by dashed vertical lines to each milestone: a repeating cycle of small loops labelled "Sprints / Kanban flow (delivery team view)". Caption underneath: "Same project, two views &mdash; formal milestones above, flexible delivery below."</p></div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">06</span> Irish example <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><div class="example"><p class="eyebrow">Illustrative Irish example</p><p>An Irish tech-for-good startup delivering a grant-funded pilot app reported to its funder against three fixed, waterfall-style milestones &mdash; while the development team worked in one-week Kanban cycles internally, adjusting features based on user testing between milestones. The funder saw predictable progress; the team retained the flexibility to respond to what users actually needed.</p></div></div>
+</details>
+</div>
+      </div>
+    </section><section class="section-tight reveal"><div class="wrap">
+      <div class="btn-row"><a class="btn btn-primary" href="#ai-in-pm">Next: AI in Project Management &rarr;</a>
+      <a class="btn" href="#resource-library">Jump to Resource Library</a></div>
+    </div></section>
+</div>
+<hr style='border:none;border-top:1px solid var(--rule);margin:0;'>
+<div id="ai-in-pm">
+<section class="titleblock-hero">
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="blob blob-3" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <div class="reveal in-view">
+      <p class="eyebrow">AI in Project Management</p>
+      <h1>AI in Project Management</h1>
+      <p class="lede">Where AI genuinely saves a small team time, and how to use it responsibly.</p>
+    </div>
+    <div class="reveal in-view">
+    <div class="titleblock">
+  <div class="row">
+    <div class="cell"><span class="label">Sheet</span><span class="value">09 / 13</span></div>
+    <div class="cell"><span class="label">Region</span><span class="value">Ireland</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Topic</span><span class="value">AI in Project Management</span></div>
+    <div class="cell"><span class="label">Level</span><span class="value">Foundation</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Est. time</span><span class="value">6 min read</span></div>
+    <div class="cell"><span class="label">Format</span><span class="value">Text / audio / video</span></div>
+  </div>
+</div>
+    </div>
+  </div>
+</section><section class="section reveal"><div class="wrap"><h2>Where AI genuinely helps a small team</h2><p>Recent research on AI in project management points to three consistently useful applications: automated scheduling and resource levelling, predictive risk flagging from historical project data, and administrative automation &mdash; meeting summarisation, status-report drafting, and data entry (PMI, 2023; Auth, Jokinen and Pasian, 2023). For a two-person project office, automating admin work often returns more time than any other single change.</p><div class="dim-rule"><span class="tick"></span></div><h2>Low-cost tools accessible to Irish SMEs and charities</h2><p>Many everyday tools now embed AI project features at low or no additional cost: AI-assisted scheduling within tools such as Asana, Trello and Monday.com; meeting-transcription and summary tools; and general-purpose assistants such as Claude or ChatGPT for drafting funding reports, risk registers, or communication plans from a set of bullet points. The barrier for most small Irish organisations is not cost but time to learn the tool &mdash; budgeting a short onboarding session pays back quickly.</p><div class="dim-rule"><span class="tick"></span></div><h2>Using AI ethically and responsibly</h2><p>The PMI Code of Ethics&rsquo; principle of honesty extends directly to AI use: outputs should be checked, not assumed accurate, and their use disclosed where they materially shape a funding report or decision (PMI, 2021). Under <strong>GDPR</strong>, Irish charities and businesses must take particular care not to input personal or sensitive data &mdash; service-user details, health information, staff records &mdash; into public AI tools without a clear lawful basis and appropriate data processing terms (Data Protection Commission, 2023). Treat AI as a fast first draft, always reviewed by a human before it reaches a funder, client or board.</p></div></section><section class="section reveal" style="background:var(--bg-alt);">
+      <div class="wrap">
+        <p class="eyebrow">Multimedia bundle for this section</p>
+        <h2>Read it, template it, watch it, hear it</h2>
+        <div class="layers">
+<details class="layer" open>
+  <summary><span class="n">01</span> Core reading <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p>Use the reading above to identify one admin-heavy task this month you could safely hand to an AI tool as a first draft &mdash; then apply the ethics check before you rely on the output.</p></div>
+</details>
+<details class="layer">
+  <summary><span class="n">02</span> Downloadable template <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p><strong>Template: Responsible AI Use Checklist</strong></p><ul class="checklist"><li>No personal, health or sensitive data entered into a public AI tool</li><li>AI output reviewed and edited by a named person before use</li><li>Use disclosed where AI materially shaped a funder-facing document</li><li>Source data used to train or prompt any tool is accurate and current</li><li>Team member responsible for the final version is clearly named</li></ul></div>
+</details>
+<details class="layer">
+  <summary><span class="n">03</span> Video script (1–2 min) <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p style="color:var(--ink-soft);font-size:0.88rem;">Record as a talking-head or slide-over-voice clip. Add captions for accessibility.</p><div class="script-box">[OPEN on host at a laptop]
+HOST: AI won't run your project for you. But it will save you hours on the parts nobody enjoys.
+[SCREEN RECORDING: bullet points being turned into a draft funder report]
+HOST: Meeting notes into a summary. Bullet points into a first-draft report. A messy risk list into a structured register.
+[CUT to host, serious tone]
+HOST: One rule: never paste personal or sensitive data &mdash; service user details, health information &mdash; into a public AI tool. And always have a human check the output before it reaches a funder or board.
+[CLOSE]
+HOST: That's the whole guide, sheet by sheet. Now go build something.</div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">04</span> Audio script (30–60 sec) <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><p style="color:var(--ink-soft);font-size:0.88rem;">Record for a podcast segment or WhatsApp voice-note style clip. Provide a text transcript alongside the audio.</p><div class="script-box">Quick guidance on AI tools for your project: they're genuinely useful for drafting &mdash; turning meeting notes into a summary, or bullet points into a first-draft funder report &mdash; and that alone can save a small team real hours each month. Two rules to keep it responsible: never enter personal or sensitive data into a public AI tool, and always have a named person review the output before it goes to a funder, client or board. Full checklist on the AI in Project Management page.</div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">05</span> Diagram to recreate <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><div class="diagram-block"><p><strong>Diagram: The Human-Checked AI Loop</strong><br>Draw a simple circular flow with four labelled stages: 1) "Input &mdash; bullet points, notes, data (no personal/sensitive info)" &rarr; 2) "AI drafts &mdash; summary, register, report" &rarr; 3) "Human reviews &amp; edits" &rarr; 4) "Final version issued, use disclosed if material" &rarr; loops back to 1. Place a small padlock icon beside stage 1 to flag the data-protection check.</p></div></div>
+</details>
+<details class="layer">
+  <summary><span class="n">06</span> Irish example <span class="plus" aria-hidden="true"></span></summary>
+  <div class="layer-body"><div class="example"><p class="eyebrow">Illustrative Irish example</p><p>A small Irish environmental charity used an AI assistant to turn its coordinator's rough bullet-point meeting notes into a structured first-draft quarterly report for its funder, cutting report preparation time by roughly half &mdash; while the coordinator still reviewed and personally approved every figure and claim before submission, consistent with the funder's own AI-use disclosure requirement.</p></div></div>
+</details>
+</div>
+      </div>
+    </section><section class="section-tight reveal"><div class="wrap">
+      <div class="btn-row"><a class="btn btn-primary" href="#resource-library">Next: Resource Library &rarr;</a>
+      <a class="btn" href="#resource-library">Jump to Resource Library</a></div>
+    </div></section>
+</div>
+<hr style='border:none;border-top:1px solid var(--rule);margin:0;'>
+<div id="resource-library">
+<section class="titleblock-hero">
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="blob blob-3" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <div class="reveal in-view">
+      <p class="eyebrow">Resource Library</p>
+      <h1>Every template, script and diagram, in one place</h1>
+      <p class="lede">The full multimedia set from across the guide &mdash; organised by type rather than topic, so you can find the format you need quickly.</p>
+    </div>
+    <div class="reveal in-view">
+    <div class="titleblock">
+  <div class="row">
+    <div class="cell"><span class="label">Sheet</span><span class="value">10 / 13</span></div>
+    <div class="cell"><span class="label">Region</span><span class="value">Ireland</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Topic</span><span class="value">Resource Library</span></div>
+    <div class="cell"><span class="label">Level</span><span class="value">Foundation</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Est. time</span><span class="value">Reference page</span></div>
+    <div class="cell"><span class="label">Format</span><span class="value">Text / audio / video</span></div>
+  </div>
+</div>
+    </div>
+  </div>
+</section><section class="section reveal"><div class="wrap">
+      <p class="eyebrow">Templates</p>
+      <h2>Text-based templates</h2>
+      <p>Every template below is written in plain text/table format so it can be copied directly into Word, Google Docs, Notion or Excel &mdash; no proprietary software required.</p>
+      <table><caption>All templates</caption><tr><th>Template</th><th>What it&rsquo;s for</th><th>Location</th></tr><tr><td>Project Charter</td><td>One-page project scope, budget and approach</td><td><a href="#foundations">Open section &rarr;</a></td></tr><tr><td>Team Charter & Ways of Working</td><td>Roles, decision rules, meeting cadence</td><td><a href="#teams-leadership">Open section &rarr;</a></td></tr><tr><td>Risk Register</td><td>Likelihood/impact scoring with named owners</td><td><a href="#risk-management">Open section &rarr;</a></td></tr><tr><td>Pre-launch Ethics & Governance Check</td><td>Conflicts, SDGs, sign-off, GDPR</td><td><a href="#ethics-governance">Open section &rarr;</a></td></tr><tr><td>RACI Matrix</td><td>Responsible / Accountable / Consulted / Informed</td><td><a href="#strategy-planning">Open section &rarr;</a></td></tr><tr><td>Stakeholder Map & Communication Plan</td><td>Power/interest grid with channel & frequency</td><td><a href="#stakeholders">Open section &rarr;</a></td></tr><tr><td>Kanban Board Columns</td><td>Backlog through to Done, with WIP limit</td><td><a href="#methodologies">Open section &rarr;</a></td></tr><tr><td>Responsible AI Use Checklist</td><td>Data protection and human sign-off</td><td><a href="#ai-in-pm">Open section &rarr;</a></td></tr></table>
+    </div></section><section class="section reveal" style="background:var(--bg-alt);"><div class="wrap">
+      <p class="eyebrow">Video, audio & diagrams</p>
+      <h2>Production-ready scripts</h2>
+      <p>Video and audio scripts are short by design &mdash; long enough to teach one idea, short enough to actually get recorded. Each is written for a single presenter, with on-screen text and shot directions included, and should be captioned when published for accessibility.</p>
+      <div class="grid grid-3"><div class="card"><span class="tag">Video + audio + diagram</span><h3>Foundations of PM</h3><p>Each section includes a 1&ndash;2 minute video script, a 30&ndash;60 second audio script, and a diagram description ready to recreate in Canva, PowerPoint or on a whiteboard.</p><p><a href="#foundations">Open scripts &rarr;</a></p></div><div class="card"><span class="tag">Video + audio + diagram</span><h3>Teams & Leadership</h3><p>Each section includes a 1&ndash;2 minute video script, a 30&ndash;60 second audio script, and a diagram description ready to recreate in Canva, PowerPoint or on a whiteboard.</p><p><a href="#teams-leadership">Open scripts &rarr;</a></p></div><div class="card"><span class="tag">Video + audio + diagram</span><h3>Risk Management</h3><p>Each section includes a 1&ndash;2 minute video script, a 30&ndash;60 second audio script, and a diagram description ready to recreate in Canva, PowerPoint or on a whiteboard.</p><p><a href="#risk-management">Open scripts &rarr;</a></p></div><div class="card"><span class="tag">Video + audio + diagram</span><h3>Ethics, Sustainability & Governance</h3><p>Each section includes a 1&ndash;2 minute video script, a 30&ndash;60 second audio script, and a diagram description ready to recreate in Canva, PowerPoint or on a whiteboard.</p><p><a href="#ethics-governance">Open scripts &rarr;</a></p></div><div class="card"><span class="tag">Video + audio + diagram</span><h3>Strategy, Planning & Implementation</h3><p>Each section includes a 1&ndash;2 minute video script, a 30&ndash;60 second audio script, and a diagram description ready to recreate in Canva, PowerPoint or on a whiteboard.</p><p><a href="#strategy-planning">Open scripts &rarr;</a></p></div><div class="card"><span class="tag">Video + audio + diagram</span><h3>Stakeholder Management</h3><p>Each section includes a 1&ndash;2 minute video script, a 30&ndash;60 second audio script, and a diagram description ready to recreate in Canva, PowerPoint or on a whiteboard.</p><p><a href="#stakeholders">Open scripts &rarr;</a></p></div><div class="card"><span class="tag">Video + audio + diagram</span><h3>Methodologies</h3><p>Each section includes a 1&ndash;2 minute video script, a 30&ndash;60 second audio script, and a diagram description ready to recreate in Canva, PowerPoint or on a whiteboard.</p><p><a href="#methodologies">Open scripts &rarr;</a></p></div><div class="card"><span class="tag">Video + audio + diagram</span><h3>AI in Project Management</h3><p>Each section includes a 1&ndash;2 minute video script, a 30&ndash;60 second audio script, and a diagram description ready to recreate in Canva, PowerPoint or on a whiteboard.</p><p><a href="#ai-in-pm">Open scripts &rarr;</a></p></div></div>
+    </div></section>
+</div>
+<hr style='border:none;border-top:1px solid var(--rule);margin:0;'>
+<div id="interactive-tools">
+<section class="titleblock-hero">
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="blob blob-3" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <div class="reveal in-view">
+      <p class="eyebrow">Interactive Tools</p>
+      <h1>Check your project before you commit resources to it</h1>
+      <p class="lede">A readiness checklist, a five-dimension self-assessment, and a short knowledge quiz &mdash; all usable directly in the browser.</p>
+    </div>
+    <div class="reveal in-view">
+    <div class="titleblock">
+  <div class="row">
+    <div class="cell"><span class="label">Sheet</span><span class="value">11 / 13</span></div>
+    <div class="cell"><span class="label">Region</span><span class="value">Ireland</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Topic</span><span class="value">Interactive Tools</span></div>
+    <div class="cell"><span class="label">Level</span><span class="value">Self-service</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Est. time</span><span class="value">Interactive</span></div>
+    <div class="cell"><span class="label">Format</span><span class="value">Text / audio / video</span></div>
+  </div>
+</div>
+    </div>
+  </div>
+</section><section class="section reveal"><div class="wrap">
+      <p class="eyebrow">Tool 1 of 3</p>
+      <h2>Project Readiness Checklist</h2>
+      <p>Tick each item your project can genuinely claim before it launches. This runs entirely in your browser &mdash; nothing is saved or sent anywhere.</p>
+      <div class="card" data-checklist="readiness">
+        <p class="mono" data-checklist-count="readiness" style="font-weight:700;color:var(--purple-dark);">0 / 10 complete</p>
+        <ul class="checklist" style="list-style:none;padding:0;">
+          <li><label><input type="checkbox"> A one-sentence purpose links this project to strategy or charitable objects</label></li>
+          <li><label><input type="checkbox"> A named sponsor with authority to approve budget and stop the project</label></li>
+          <li><label><input type="checkbox"> Success criteria are written down, not just implied</label></li>
+          <li><label><input type="checkbox"> A budget has been approved, including a contingency</label></li>
+          <li><label><input type="checkbox"> Key stakeholders have been mapped by power and interest</label></li>
+          <li><label><input type="checkbox"> A first-pass risk register exists with at least five risks</label></li>
+          <li><label><input type="checkbox"> Roles and RACI are clear for the core team</label></li>
+          <li><label><input type="checkbox"> A delivery approach (waterfall / agile / hybrid) has been chosen deliberately</label></li>
+          <li><label><input type="checkbox"> Any personal or sensitive data use has been checked against GDPR</label></li>
+          <li><label><input type="checkbox"> A communication plan and reporting cadence exists for funders/board</label></li>
+        </ul>
+      </div>
+    </div></section><section class="section reveal" style="background:var(--bg-alt);"><div class="wrap">
+      <p class="eyebrow">Tool 2 of 3</p>
+      <h2>Organisational Readiness Self-Assessment</h2>
+      <p>Rate your organisation from 1 (not in place) to 5 (well established) on each dimension. The score updates as you move each slider.</p>
+      <form class="card" data-selfassess onsubmit="return false;">
+        <div style="display:grid;gap:1.1rem;">
+          <label>Governance clarity (who decides, who&rsquo;s accountable)<br><input type="range" min="1" max="5" value="3" style="width:100%;"></label>
+          <label>Risk management practice<br><input type="range" min="1" max="5" value="3" style="width:100%;"></label>
+          <label>Stakeholder &amp; funder communication<br><input type="range" min="1" max="5" value="3" style="width:100%;"></label>
+          <label>Team capacity &amp; role clarity<br><input type="range" min="1" max="5" value="3" style="width:100%;"></label>
+          <label>Planning &amp; scheduling discipline<br><input type="range" min="1" max="5" value="3" style="width:100%;"></label>
+        </div>
+        <p class="mono" data-selfassess-result style="margin-top:1.2rem;font-weight:700;color:var(--purple-dark);">Move a slider to see your readiness score.</p>
+      </form>
+    </div></section><section class="section reveal"><div class="wrap" data-quiz>
+      <p class="eyebrow">Tool 3 of 3</p>
+      <h2>Five-question knowledge check</h2>
+      <p>A quick check of the fundamentals covered in this guide.</p>
+      <form class="card">
+        <div data-answer="b" class="q">
+          <p><strong>1. What best defines a &ldquo;project&rdquo;?</strong></p>
+          <label><input type="radio" name="q1" value="a"> Any task assigned to staff</label><br>
+          <label><input type="radio" name="q1" value="b"> A temporary undertaking with a defined start, end and outcome</label><br>
+          <label><input type="radio" name="q1" value="c"> Ongoing, repeatable operational work</label>
+          <p class="q-feedback mono" style="font-size:0.85rem;"></p>
+        </div>
+        <div class="dim-rule"><span class="tick"></span></div>
+        <div data-answer="c" class="q">
+          <p><strong>2. On a power&ndash;interest stakeholder grid, a key funder with high power and moderate interest should be&hellip;</strong></p>
+          <label><input type="radio" name="q2" value="a"> Ignored until reporting is due</label><br>
+          <label><input type="radio" name="q2" value="b"> Given the same updates as everyone else</label><br>
+          <label><input type="radio" name="q2" value="c"> Managed closely with regular, targeted communication</label>
+          <p class="q-feedback mono" style="font-size:0.85rem;"></p>
+        </div>
+        <div class="dim-rule"><span class="tick"></span></div>
+        <div data-answer="a" class="q">
+          <p><strong>3. Which body regulates Irish registered charities&rsquo; governance?</strong></p>
+          <label><input type="radio" name="q3" value="a"> The Charities Regulator</label><br>
+          <label><input type="radio" name="q3" value="b"> The Companies Registration Office</label><br>
+          <label><input type="radio" name="q3" value="c"> Revenue Commissioners</label>
+          <p class="q-feedback mono" style="font-size:0.85rem;"></p>
+        </div>
+        <div class="dim-rule"><span class="tick"></span></div>
+        <div data-answer="b" class="q">
+          <p><strong>4. Which delivery approach best suits ongoing, variable-volume work like a caseload?</strong></p>
+          <label><input type="radio" name="q4" value="a"> Waterfall</label><br>
+          <label><input type="radio" name="q4" value="b"> Kanban</label><br>
+          <label><input type="radio" name="q4" value="c"> PRINCE2 only</label>
+          <p class="q-feedback mono" style="font-size:0.85rem;"></p>
+        </div>
+        <div class="dim-rule"><span class="tick"></span></div>
+        <div data-answer="c" class="q">
+          <p><strong>5. Before entering data into a public AI tool for a funder report, you should first&hellip;</strong></p>
+          <label><input type="radio" name="q5" value="a"> Enter as much detail as possible for accuracy</label><br>
+          <label><input type="radio" name="q5" value="b"> Ask the AI tool if the data is sensitive</label><br>
+          <label><input type="radio" name="q5" value="c"> Check the data contains no personal or sensitive information</label>
+          <p class="q-feedback mono" style="font-size:0.85rem;"></p>
+        </div>
+        <button class="btn btn-primary" type="submit" style="margin-top:1.2rem;">Check my answers</button>
+        <p data-quiz-result hidden style="margin-top:1rem;font-weight:700;"></p>
+      </form>
+    </div></section>
+</div>
+<hr style='border:none;border-top:1px solid var(--rule);margin:0;'>
+<div id="referencing">
+<section class="titleblock-hero">
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="blob blob-3" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <div class="reveal in-view">
+      <p class="eyebrow">References</p>
+      <h1>Referencing & Further Reading</h1>
+      <p class="lede">The academic, business and Irish government sources this guide draws on, in Harvard style, with a short note on why each matters.</p>
+    </div>
+    <div class="reveal in-view">
+    <div class="titleblock">
+  <div class="row">
+    <div class="cell"><span class="label">Sheet</span><span class="value">12 / 13</span></div>
+    <div class="cell"><span class="label">Region</span><span class="value">Ireland</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Topic</span><span class="value">References</span></div>
+    <div class="cell"><span class="label">Level</span><span class="value">Foundation</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Est. time</span><span class="value">Reference page</span></div>
+    <div class="cell"><span class="label">Format</span><span class="value">Text / audio / video</span></div>
+  </div>
+</div>
+    </div>
+  </div>
+</section><section class="section reveal"><div class="wrap">
+    <p class="eyebrow">Academic sources</p>
+    <h2>Core academic references</h2>
+    <ul class="mono" style="font-size:0.9rem;line-height:1.9;list-style:none;padding:0;">
+      <li>Anderson, D.J. (2010) <em>Kanban: Successful Evolutionary Change for Your Technology Business</em>. Sequim, WA: Blue Hole Press.</li>
+      <li>Bass, B.M. (1985) <em>Leadership and Performance Beyond Expectations</em>. New York: Free Press.</li>
+      <li>Beck, K. <em>et al.</em> (2001) <em>Manifesto for Agile Software Development</em>. Available at: agilemanifesto.org.</li>
+      <li>Belbin, R.M. (2010) <em>Team Roles at Work</em>. 2nd edn. Oxford: Butterworth-Heinemann.</li>
+      <li>Bourne, L. (2009) <em>Stakeholder Relationship Management: A Maturity Model for Organisational Implementation</em>. Farnham: Gower.</li>
+      <li>Cadbury, A. (1992) <em>Report of the Committee on the Financial Aspects of Corporate Governance</em>. London: Gee.</li>
+      <li>Freeman, R.E. (1984) <em>Strategic Management: A Stakeholder Approach</em>. Boston: Pitman.</li>
+      <li>Greenleaf, R.K. (1977) <em>Servant Leadership</em>. New York: Paulist Press.</li>
+      <li>Heifetz, R., Grashow, A. and Linsky, M. (2009) <em>The Practice of Adaptive Leadership</em>. Boston: Harvard Business Press.</li>
+      <li>Kaplan, R.S. and Norton, D.P. (1996) <em>The Balanced Scorecard</em>. Boston: Harvard Business School Press.</li>
+      <li>Kotter, J.P. (1996) <em>Leading Change</em>. Boston: Harvard Business School Press.</li>
+      <li>Mendelow, A. (1981) &lsquo;Environmental scanning: the impact of the stakeholder concept&rsquo;, <em>Proceedings of the 2nd International Conference on Information Systems</em>, Cambridge, MA.</li>
+      <li>Royce, W.W. (1970) &lsquo;Managing the development of large software systems&rsquo;, <em>Proceedings of IEEE WESCON</em>, 26, pp. 1&ndash;9.</li>
+      <li>Schwaber, K. and Sutherland, J. (2020) <em>The Scrum Guide</em>. Available at: scrumguides.org.</li>
+      <li>Thomas, K.W. and Kilmann, R.H. (1974) <em>Thomas-Kilmann Conflict Mode Instrument</em>. Tuxedo, NY: Xicom.</li>
+      <li>Tuckman, B.W. (1965) &lsquo;Developmental sequence in small groups&rsquo;, <em>Psychological Bulletin</em>, 63(6), pp. 384&ndash;399.</li>
+      <li>Tuckman, B.W. and Jensen, M.A.C. (1977) &lsquo;Stages of small-group development revisited&rsquo;, <em>Group &amp; Organization Studies</em>, 2(4), pp. 419&ndash;427.</li>
+      <li>Womack, J.P. and Jones, D.T. (1996) <em>Lean Thinking</em>. New York: Simon &amp; Schuster.</li>
+    </ul>
+    </div></section><section class="section reveal" style="background:var(--bg-alt);"><div class="wrap">
+    <p class="eyebrow">Business & professional sources</p>
+    <h2>Bodies of knowledge and standards</h2>
+    <ul class="mono" style="font-size:0.9rem;line-height:1.9;list-style:none;padding:0;">
+      <li>Association for Project Management (APM) (2019) <em>APM Body of Knowledge</em>. 7th edn. Princes Risborough: APM.</li>
+      <li>AXELOS (2017) <em>Managing Successful Projects with PRINCE2</em>. 6th edn. London: The Stationery Office.</li>
+      <li>Project Management Institute (PMI) (2021) <em>A Guide to the Project Management Body of Knowledge (PMBOK&reg; Guide)</em>. 7th edn. Newtown Square, PA: PMI.</li>
+      <li>Project Management Institute (PMI) (2021) <em>Code of Ethics and Professional Conduct</em>. Newtown Square, PA: PMI.</li>
+      <li>Project Management Institute (PMI) (2023) <em>AI Innovators: Cracking the Code on Project Performance</em>. Newtown Square, PA: PMI.</li>
+      <li>Hillson, D. (2009) <em>Managing Risk in Projects</em>. Farnham: Gower.</li>
+      <li>Conforto, E.C. <em>et al.</em> (2014) &lsquo;Can agile project management be adopted by industries other than software development?&rsquo;, <em>Project Management Journal</em>, 45(3), pp. 21&ndash;34.</li>
+      <li>United Nations (2015) <em>Transforming Our World: The 2030 Agenda for Sustainable Development</em>. New York: UN.</li>
+    </ul>
+    </div></section><section class="section reveal"><div class="wrap">
+    <p class="eyebrow">Irish government & regulatory sources</p>
+    <h2>Irish policy, regulation and support bodies</h2>
+    <ul class="mono" style="font-size:0.9rem;line-height:1.9;list-style:none;padding:0;">
+      <li>Charities Regulator (2018) <em>Charities Governance Code</em>. Dublin: Charities Regulator.</li>
+      <li>Data Protection Commission (2023) <em>Guidance on the Use of AI</em>. Dublin: DPC.</li>
+      <li>Enterprise Ireland (2023) <em>Supports for Small Business</em>. Dublin: Enterprise Ireland.</li>
+      <li>Government of Ireland (2009) <em>Charities Act 2009</em>. Dublin: Stationery Office.</li>
+      <li>Government of Ireland (2014) <em>Companies Act 2014</em>. Dublin: Stationery Office.</li>
+      <li>Local Enterprise Office (LEO) network &mdash; localenterprise.ie.</li>
+      <li>The Wheel &mdash; national association of Irish community, voluntary and charitable organisations &mdash; wheel.ie.</li>
+      <li>Pobal (2023) <em>Programme &amp; Funding Guidance</em>. Dublin: Pobal.</li>
+    </ul>
+    <p style="margin-top:1rem;font-size:0.9rem;color:var(--ink-soft);">Note: government and regulatory guidance changes; always confirm current requirements directly with the relevant body before relying on them for compliance decisions.</p>
+    </div></section><section class="section reveal" style="background:var(--bg-alt);"><div class="wrap">
+    <p class="eyebrow">Annotated bibliography &mdash; five starting points</p>
+    <h2>If you only read five sources, read these</h2>
+    <div class="grid grid-2">
+      <div class="card"><h3>PMI (2021) PMBOK&reg; Guide, 7th edn</h3><p>The single most widely referenced project management standard; useful as a shared vocabulary even where you don&rsquo;t adopt its full structure.</p></div>
+      <div class="card"><h3>Belbin, R.M. (2010) Team Roles at Work</h3><p>Practical, well-evidenced grounding for thinking about team composition without over-relying on personality-typing.</p></div>
+      <div class="card"><h3>Kotter, J.P. (1996) Leading Change</h3><p>The clearest short explanation of why plans fail at the implementation stage, not the planning stage.</p></div>
+      <div class="card"><h3>Charities Regulator (2018) Charities Governance Code</h3><p>Mandatory reading for any Irish charity trustee or project sponsor &mdash; sets the governance floor projects must sit above.</p></div>
+      <div class="card"><h3>Freeman, R.E. (1984) Strategic Management: A Stakeholder Approach</h3><p>The founding text of stakeholder theory, still the clearest statement of why stakeholder management is not &ldquo;soft&rdquo; project work.</p></div>
+    </div>
+    </div></section>
+</div>
+<hr style='border:none;border-top:1px solid var(--rule);margin:0;'>
+<div id="standards">
+<section class="titleblock-hero">
+  <div class="blob blob-1" aria-hidden="true"></div>
+  <div class="blob blob-2" aria-hidden="true"></div>
+  <div class="blob blob-3" aria-hidden="true"></div>
+  <div class="wrap inner">
+    <div class="reveal in-view">
+      <p class="eyebrow">Guide Standards</p>
+      <h1>The design, tone and accessibility standards behind this guide</h1>
+      <p class="lede">Full site map, colour palette, typography, tone of voice, and the accessibility checklist this site is built to &mdash; included for transparency and for reuse by other organisations.</p>
+    </div>
+    <div class="reveal in-view">
+    <div class="titleblock">
+  <div class="row">
+    <div class="cell"><span class="label">Sheet</span><span class="value">13 / 13</span></div>
+    <div class="cell"><span class="label">Region</span><span class="value">Ireland</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Topic</span><span class="value">Guide Standards</span></div>
+    <div class="cell"><span class="label">Level</span><span class="value">Foundation</span></div>
+  </div>
+  <div class="row">
+    <div class="cell"><span class="label">Est. time</span><span class="value">Reference page</span></div>
+    <div class="cell"><span class="label">Format</span><span class="value">Text / audio / video</span></div>
+  </div>
+</div>
+    </div>
+  </div>
+</section><section class="section reveal" id="sitemap"><div class="wrap">
+      <p class="eyebrow">Full site map</p>
+      <h2>All thirteen sheets</h2>
+      <div class="toc">
+        <a href="#top">01 &middot; Homepage</a>
+        <a href="#foundations">02 &middot; Foundations of Project Management</a>
+        <a href="#teams-leadership">03 &middot; Teams &amp; Leadership</a>
+        <a href="#risk-management">04 &middot; Risk Management</a>
+        <a href="#ethics-governance">05 &middot; Ethics, Sustainability &amp; Governance</a>
+        <a href="#strategy-planning">06 &middot; Strategy, Planning &amp; Implementation</a>
+        <a href="#stakeholders">07 &middot; Stakeholder Management</a>
+        <a href="#methodologies">08 &middot; Methodologies</a>
+        <a href="#ai-in-pm">09 &middot; AI in Project Management</a>
+        <a href="#resource-library">10 &middot; Multimedia Resource Library</a>
+        <a href="#interactive-tools">11 &middot; Interactive Tools</a>
+        <a href="#referencing">12 &middot; Referencing &amp; Further Reading</a>
+        <a href="#standards">13 &middot; Guide Standards (this page)</a>
+      </div>
+    </div></section><section class="section reveal" id="palette" style="background:var(--bg-alt);"><div class="wrap">
+      <p class="eyebrow">Colour palette</p>
+      <h2>A bold, accessible palette built around vivid purple &amp; hot pink</h2>
+      <p>The two source colours were pushed brighter and extended into a full accessible system: a soft near-white background rather than pure white, a deep purple-black ink rather than pure black, and a grounding success green used only for confirmations and Irish examples so colour is never the only way information is conveyed. A purple-to-pink gradient carries the energy across headlines, buttons and accents.</p>
+      <div class="swatch-row">
+        <div class="swatch"><div class="chip" style="background:#FCFAFF;border:1px solid #ccc;"></div><div class="name">Background</div><div class="hex">#FCFAFF</div></div>
+        <div class="swatch"><div class="chip" style="background:#17102B;"></div><div class="name">Ink</div><div class="hex">#17102B</div></div>
+        <div class="swatch"><div class="chip" style="background:#7C2AF5;"></div><div class="name">Purple (primary)</div><div class="hex">#7C2AF5</div></div>
+        <div class="swatch"><div class="chip" style="background:#F4EEFF;border:1px solid #ccc;"></div><div class="name">Purple tint</div><div class="hex">#F4EEFF</div></div>
+        <div class="swatch"><div class="chip" style="background:#FF4FA0;"></div><div class="name">Pink (accent)</div><div class="hex">#FF4FA0</div></div>
+        <div class="swatch"><div class="chip" style="background:#16A34A;"></div><div class="name">Success</div><div class="hex">#16A34A</div></div>
+      </div>
+      <p style="margin-top:1.2rem;">All body text combinations on this site meet WCAG 2.1 AA contrast (4.5:1 for body text, 3:1 for large text) &mdash; Ink on background, Ink on the purple tint, and white on the purple/pink gradient buttons were each checked before use.</p>
+    </div></section><section class="section reveal"><div class="wrap">
+      <p class="eyebrow">Typography</p>
+      <h2>Three typefaces, each doing one job</h2>
+      <div class="grid grid-3">
+        <div class="card"><span class="tag">Display</span><h3 style="font-family:'Sora',sans-serif;">Sora</h3><p>Used for headings only. A bold, rounded geometric sans that carries the energy of the palette without sacrificing legibility.</p></div>
+        <div class="card"><span class="tag">Body</span><h3 style="font-family:'Atkinson Hyperlegible',sans-serif;">Atkinson Hyperlegible</h3><p>Used for all body text. Designed by the Braille Institute specifically to increase legibility for low-vision readers; also widely recommended for dyslexia-friendly reading.</p></div>
+        <div class="card"><span class="tag">Utility</span><h3 style="font-family:'IBM Plex Mono',monospace;">IBM Plex Mono</h3><p>Used for labels, section numbers, and template/table captions &mdash; kept small and used sparingly, never for long-form reading.</p></div>
+      </div>
+    </div></section><section class="section reveal" id="tone" style="background:var(--bg-alt);"><div class="wrap">
+      <p class="eyebrow">Tone & voice guide</p>
+      <h2>Warm, clear, confident, credible, practical</h2>
+      <table><caption>How each principle shows up on the page</caption>
+        <tr><th>Principle</th><th>In practice on this site</th></tr>
+        <tr><td>Warm</td><td>Second person (&ldquo;you&rdquo;/&ldquo;your team&rdquo;), no jargon without explanation, encouraging rather than instructive framing.</td></tr>
+        <tr><td>Clear</td><td>Short sentences, one idea per paragraph, headings that describe the content rather than tease it.</td></tr>
+        <tr><td>Confident</td><td>Direct recommendations (&ldquo;use this template&rdquo;) rather than hedged suggestions; sources cited rather than asserted.</td></tr>
+        <tr><td>Academically polished</td><td>Harvard referencing throughout; claims traceable to a named, credible source.</td></tr>
+        <tr><td>Practical</td><td>Every topic ends in a template, checklist or script &mdash; never theory alone.</td></tr>
+        <tr><td>Irish-contextualised</td><td>Named Irish regulators, funders and illustrative examples in every section.</td></tr>
+      </table>
+    </div></section><section class="section reveal" id="accessibility"><div class="wrap">
+      <p class="eyebrow">Accessibility checklist</p>
+      <h2>What this site is built to</h2>
+      <ul class="checklist">
+        <li>Colour contrast meets WCAG 2.1 AA across all text/background combinations</li>
+        <li>Body typeface (Atkinson Hyperlegible) designed for low-vision and dyslexia-friendly reading</li>
+        <li>All interactive elements (accordions, checklist, quiz) usable by keyboard alone, with a visible focus outline</li>
+        <li>Skip-to-content link on every page for screen-reader and keyboard users</li>
+        <li>Semantic HTML landmarks (header, nav, main, footer) on every page</li>
+        <li><code>prefers-reduced-motion</code> respected &mdash; all scroll animation, parallax and progress-bar motion is disabled automatically for users who request it</li>
+        <li>No information conveyed by colour alone (icons and text labels accompany every colour-coded element)</li>
+        <li>Plain-English writing, short sentences, jargon explained on first use</li>
+        <li>Every video and audio script published with a full text transcript alongside it</li>
+        <li>Responsive layout tested down to a 360px-wide mobile viewport</li>
+      </ul>
+    </div></section><section class="section reveal" style="background:var(--bg-alt);"><div class="wrap">
+      <p class="eyebrow">Recommended external resources</p>
+      <h2>Where to go deeper</h2>
+      <div class="grid grid-2">
+        <div class="card"><h3>Charities Regulator &ndash; Governance Code hub</h3><p>The definitive, current guidance for Irish charity trustees; check here before relying on this guide&rsquo;s governance summary.</p></div>
+        <div class="card"><h3>The Wheel</h3><p>Ireland&rsquo;s national association for community, voluntary and charitable organisations &mdash; training, policy updates and peer support.</p></div>
+        <div class="card"><h3>Local Enterprise Office (LEO) network</h3><p>Free mentoring, training and grant supports for Irish small businesses, delivered locally across every county.</p></div>
+        <div class="card"><h3>PMI &amp; APM standards libraries</h3><p>The full PMBOK&reg; Guide and APM Body of Knowledge, for readers who want the complete academic frameworks behind this guide&rsquo;s summaries.</p></div>
+      </div>
+    </div></section>
+</div>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <h4>The Project Plan</h4>
+      <p style="max-width:32ch;color:#D9D3EC;font-size:0.92rem;">A free, accessible project management guide built for small businesses and charities working in Ireland. Created as an MSc Project Management assignment.</p>
+    </div>
+    <div>
+      <h4>Guide</h4>
+      <ul>
+        <li><a href="#foundations">Foundations</a></li>
+        <li><a href="#methodologies">Methodologies</a></li>
+        <li><a href="#ai-in-pm">AI in PM</a></li>
+        <li><a href="#standards">Full site map</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Tools</h4>
+      <ul>
+        <li><a href="#interactive-tools">PM readiness quiz</a></li>
+        <li><a href="#resource-library">Resource library</a></li>
+        <li><a href="#referencing">References</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Standards</h4>
+      <ul>
+        <li><a href="#standards-palette">Colour &amp; type</a></li>
+        <li><a href="#standards-accessibility">Accessibility checklist</a></li>
+        <li><a href="#standards-tone">Tone &amp; voice guide</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap stamp">SHEET SET 01–13 · REV A · PREPARED FOR IRISH SMEs &amp; CHARITIES · NOT LEGAL OR FINANCIAL ADVICE</div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- mobile nav toggle ----------
+  var toggle = document.querySelector('.nav-toggle');
+  var nav = document.querySelector('.main-nav');
+  if (toggle && nav) {
+    toggle.addEventListener('click', function () {
+      var open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  // ---------- header shadow + scroll progress bar ----------
+  var header = document.querySelector('.site-header');
+  var progress = document.querySelector('.scroll-progress');
+  function onScroll() {
+    var scrollTop = window.scrollY || document.documentElement.scrollTop;
+    if (header) header.classList.toggle('scrolled', scrollTop > 8);
+    if (progress) {
+      var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      var pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      progress.style.width = pct + '%';
+    }
+    if (!reduceMotion) updateParallax(scrollTop);
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ---------- parallax blobs ----------
+  var blobs = document.querySelectorAll('.blob');
+  function updateParallax(scrollTop) {
+    blobs.forEach(function (b, i) {
+      var speed = 0.08 + i * 0.05;
+      b.style.transform = 'translateY(' + (scrollTop * speed) + 'px)';
+    });
+  }
+
+  // ---------- reveal-on-scroll (progressive enhancement: content is visible
+  // by default in CSS; only arm the hide/reveal animation if this script
+  // successfully runs and IntersectionObserver is supported) ----------
+  var revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && revealEls.length && !reduceMotion) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(function (el) {
+      el.classList.add('reveal-armed');
+      io.observe(el);
+    });
+  }
+
+  // ---------- section-spy nav highlighting (single-page anchor nav) ----------
+  var navLinks = document.querySelectorAll('.main-nav a[href^="#"]');
+  var spySections = [];
+  navLinks.forEach(function (link) {
+    var id = link.getAttribute('href').slice(1);
+    var el = document.getElementById(id);
+    if (el) spySections.push({ id: id, el: el, link: link });
+  });
+  if ('IntersectionObserver' in window && spySections.length > 1) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        var match = spySections.find(function (s) { return s.el === entry.target; });
+        if (!match) return;
+        if (entry.isIntersecting) {
+          navLinks.forEach(function (l) { l.classList.remove('active'); });
+          match.link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+    spySections.forEach(function (s) { spy.observe(s.el); });
+  }
+
+  // ---------- interactive checklist ----------
+  document.querySelectorAll('[data-checklist]').forEach(function (list) {
+    var boxes = list.querySelectorAll('input[type="checkbox"]');
+    var counter = document.querySelector('[data-checklist-count="' + list.dataset.checklist + '"]');
+    function update() {
+      var checked = list.querySelectorAll('input[type="checkbox"]:checked').length;
+      if (counter) counter.textContent = checked + ' / ' + boxes.length + ' complete';
+    }
+    boxes.forEach(function (b) { b.addEventListener('change', update); });
+    update();
+  });
+
+  // ---------- scored quiz ----------
+  document.querySelectorAll('[data-quiz]').forEach(function (quiz) {
+    var form = quiz.querySelector('form');
+    var result = quiz.querySelector('[data-quiz-result]');
+    if (!form) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var questions = quiz.querySelectorAll('[data-answer]');
+      var score = 0;
+      questions.forEach(function (q) {
+        var correct = q.dataset.answer;
+        var picked = q.querySelector('input[type="radio"]:checked');
+        var note = q.querySelector('.q-feedback');
+        if (picked && picked.value === correct) {
+          score++;
+          if (note) { note.textContent = 'Correct.'; note.style.color = '#16A34A'; }
+        } else if (note) {
+          note.textContent = picked ? 'Not quite — review this topic.' : 'No answer selected.';
+          note.style.color = '#FF4FA0';
+        }
+      });
+      if (result) {
+        result.hidden = false;
+        result.textContent = 'Score: ' + score + ' / ' + questions.length + '. ' + (
+          score === questions.length ? 'Excellent — you have a strong grasp of the fundamentals.' :
+          score >= questions.length * 0.6 ? 'Good progress — revisit the highlighted sections above.' :
+          'Worth a re-read of the Foundations and Methodologies sections before you start planning.'
+        );
+        result.setAttribute('tabindex', '-1');
+        result.focus();
+      }
+    });
+  });
+
+  // ---------- self-assessment slider tool ----------
+  var selfForm = document.querySelector('[data-selfassess]');
+  if (selfForm) {
+    var out = document.querySelector('[data-selfassess-result]');
+    selfForm.addEventListener('input', function () {
+      var sliders = selfForm.querySelectorAll('input[type="range"]');
+      var total = 0, max = 0;
+      sliders.forEach(function (s) { total += Number(s.value); max += Number(s.max); });
+      var pct = Math.round((total / max) * 100);
+      var label = pct >= 80 ? 'Strong readiness — proceed to detailed planning.' :
+                  pct >= 55 ? 'Reasonable readiness — shore up the weaker dimensions first.' :
+                  'Early stage — treat this as a discovery phase before committing resources.';
+      if (out) out.textContent = 'Readiness score: ' + pct + '%. ' + label;
+    });
+  }
+});
+
+</script>
+</body>
+</html>
